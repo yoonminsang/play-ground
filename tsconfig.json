@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "references": [
+    {
+      "path": "packages/client-a"
+    },
+    // {
+    //   "path": "packages/client-b"
+    // },
+    {
+      "path": "packages/common-components"
+    },
+    {
+      "path": "packages/common-const"
+    },
+    {
+      "path": "packages/common-hooks"
+    },
+    // {
+    //   "path": "packages/common-lib"
+    // },
+    // {
+    //   "path": "packages/common-styles"
+    // },
+    {
+      "path": "packages/common-types"
+    },
+    {
+      "path": "packages/common-utils"
+    }
+  ],
+  "exclude": ["packages/**/dist/**"],
+  "include": []
+}

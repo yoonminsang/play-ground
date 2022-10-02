@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "@emotion/babel-plugin",
+      {
+        "autoLabel": "dev-only",
+        "labelFormat": "[dirname]--[filename]--[local]___"
+      }
+    ]
+  ],
+  "presets": [
+    ["@babel/preset-env", { "shippedProposals": true }],
+    ["@babel/preset-react", { "runtime": "automatic", "importSource": "@emotion/react" }],
+    ["@babel/preset-typescript", { "onlyRemoveTypeImports": true }]
+  ]
+}
