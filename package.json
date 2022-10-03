@@ -11,7 +11,8 @@
     "common-styles": "yarn workspace @common/styles",
     "common-types": "yarn workspace @common/types",
     "common-utils": "yarn workspace @common/utils",
-    "server": "yarn workspace server"
+    "server": "yarn workspace server",
+    "postinstall": "husky install"
   },
   "workspaces": [
     "packages/*"
@@ -33,6 +34,8 @@
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-storybook": "^0.6.4",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "^4.8.3"
   }
