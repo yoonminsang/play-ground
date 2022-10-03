@@ -11,7 +11,15 @@
     "types": ["vite-plugin-svgr/client", "@emotion/react/types/css-prop"],
     "baseUrl": "src"
   },
-  "include": ["src", ".storybook/*", "@types/*", "jest.setup.ts", "jest.config.cjs", "scripts/*"],
+  "include": [
+    "src",
+    ".storybook/*",
+    "../common-styles/src/emotion.d.ts",
+    "@types/*",
+    "jest.setup.ts",
+    "jest.config.cjs",
+    "scripts/*"
+  ],
   "paths": {
     "assets/*": ["assets/*"],
     "components/*": ["components/*"],
