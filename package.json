@@ -13,7 +13,7 @@
     "common-utils": "yarn workspace @common/utils",
     "server": "yarn workspace server",
     "postinstall": "husky install",
-    "test": "yarn workspaces foreach --parallel --include client-a --include @common/components run test"
+    "test": "yarn workspaces foreach --parallel --include client-a --include @common/components --include @common/utils run test"
   },
   "workspaces": [
     "packages/*"
