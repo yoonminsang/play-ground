@@ -5,6 +5,7 @@ import { GlobalStyle, theme } from '@common/styles';
 import { ThemeProvider } from '@emotion/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Spinner } from '@common/components';
+
 import ErrorBoundaryPage from 'pages/error/error-boundary';
 
 import App from './App';

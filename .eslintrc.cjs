@@ -123,6 +123,16 @@ module.exports = {
     //   },
     // },
     {
+      files: ['packages/client-tetris/**/*.ts?(x)', 'packages/client-tetris/**/*.js?(x)'],
+      settings: {
+        'import/resolver': {
+          typescript: {
+            project: path.resolve(`${__dirname}/packages/client-tetris/tsconfig.json`),
+          },
+        },
+      },
+    },
+    {
       files: ['packages/common-components/**/*.ts?(x)', 'packages/common-components/**/*.js?(x)'],
       settings: {
         'import/resolver': {
