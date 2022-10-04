@@ -23,6 +23,7 @@
   "paths": {
     "assets/*": ["assets/*"],
     "components/*": ["components/*"],
+    "const/*": ["const/*"],
     "domain/*": ["domain/*"],
     "pages/*": ["pages/*"],
     "utils/*": ["utils/*"]
