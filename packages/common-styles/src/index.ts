@@ -1,4 +1,4 @@
 export * from './theme';
-export * from './break-points';
-export * from './global-style';
-export * from './media-query';
+export * from './breakPoints';
+export * from './globalStyle';
+export * from './mediaQuery';

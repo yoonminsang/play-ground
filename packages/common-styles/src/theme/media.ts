@@ -1,5 +1,5 @@
-import { breakPoints } from '../break-points';
-import { mediaQuery } from '../media-query';
+import { breakPoints } from '../breakPoints';
+import { mediaQuery } from '../mediaQuery';
 
 export const media = {
   xxlarge: mediaQuery(breakPoints.xxlarge),
