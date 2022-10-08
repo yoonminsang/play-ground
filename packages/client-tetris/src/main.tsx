@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import ReactDOM from 'react-dom/client';
 import { GlobalStyle, theme } from '@common/styles';
-import { ThemeProvider } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Spinner } from '@common/components';
 
@@ -18,7 +18,25 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ErrorBoundaryPage resetErrorBoundary={resetErrorBoundary} error={error} />
       )}
     >
-      <Suspense fallback={<Spinner color="grey" size="xl" />}>
+      <Suspense
+        fallback={
+          <div
+            css={css`
+              width: 100vw;
+              height: 100vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              position: fixed;
+              left: 0;
+              top: 0;
+            `}
+          >
+            <Spinner color="grey" size="xl" />
+          </div>
+        }
+      >
         <App />
       </Suspense>
     </ErrorBoundary>
