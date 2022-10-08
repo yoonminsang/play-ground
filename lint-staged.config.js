@@ -1,6 +1,6 @@
 module.exports = {
   '*.+(ts|tsx)': [() => 'yarn tsc -p tsconfig.json --noEmit'],
-  'packages/client-a/**/*.+(ts|tsx)': [() => 'yarn tsc -p packages/client-a/tsconfig.json --noEmit'],
+  'packages/common-setting/**/*.+(ts|tsx)': [() => 'yarn tsc -p packages/common-setting/tsconfig.json --noEmit'],
   'packages/common-components/**/*.+(ts|tsx)': [() => 'yarn tsc -p packages/common-components/tsconfig.json --noEmit'],
   'packages/common-const/**/*.+(ts|tsx)': [() => 'yarn tsc -p packages/common-const/tsconfig.json --noEmit'],
   'packages/common-hooks/**/*.+(ts|tsx)': [() => 'yarn tsc -p packages/common-hooks/tsconfig.json --noEmit'],

@@ -15,11 +15,11 @@
   },
   "references": [
     {
-      "path": "packages/client-a"
+      "path": "packages/client-setting"
     },
-    // {
-    //   "path": "packages/client-b"
-    // },
+    {
+      "path": "packages/client-tetris"
+    },
     {
       "path": "packages/common-components"
     },
@@ -32,9 +32,9 @@
     // {
     //   "path": "packages/common-lib"
     // },
-    // {
-    //   "path": "packages/common-styles"
-    // },
+    {
+      "path": "packages/common-styles"
+    },
     {
       "path": "packages/common-types"
     },
