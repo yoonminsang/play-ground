@@ -2,8 +2,7 @@
   "name": "yarn-berry-monorepo-template",
   "packageManager": "yarn@3.2.3",
   "scripts": {
-    "client-a": "yarn workspace client-a",
-    "client-b": "yarn workspace client-b",
+    "client-setting": "yarn workspace client-setting",
     "client-tetris": "yarn workspace client-tetris",
     "common-components": "yarn workspace @common/components",
     "common-const": "yarn workspace @common/const",

@@ -103,25 +103,15 @@ module.exports = {
       },
     },
     {
-      files: ['packages/client-a/**/*.ts?(x)', 'packages/client-a/**/*.js?(x)'],
+      files: ['packages/client-setting/**/*.ts?(x)', 'packages/client-setting/**/*.js?(x)'],
       settings: {
         'import/resolver': {
           typescript: {
-            project: path.resolve(`${__dirname}/packages/client-a/tsconfig.json`),
+            project: path.resolve(`${__dirname}/packages/client-setting/tsconfig.json`),
           },
         },
       },
     },
-    // {
-    //   files: ['packages/client-b/**/*.ts?(x)', 'packages/client-b/**/*.js?(x)'],
-    //   settings: {
-    //     'import/resolver': {
-    //       typescript: {
-    //         project: path.resolve(`${__dirname}/packages/client-b/tsconfig.json`),
-    //       },
-    //     },
-    //   },
-    // },
     {
       files: ['packages/client-tetris/**/*.ts?(x)', 'packages/client-tetris/**/*.js?(x)'],
       settings: {
