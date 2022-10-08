@@ -6,7 +6,7 @@ import { ThemeProvider } from '@emotion/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Spinner } from '@common/components';
 
-import ErrorBoundaryPage from 'pages/error/error-boundary';
+import ErrorBoundaryPage from 'pages/error/ErrorBoundaryPage';
 
 import App from './App';
 
