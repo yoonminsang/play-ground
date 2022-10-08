@@ -27,6 +27,7 @@
     "domain/*": ["domain/*"],
     "layout/*": ["layout/*"],
     "pages/*": ["pages/*"],
+    "types/*": ["types/*"],
     "utils/*": ["utils/*"]
   },
   "references": [{ "path": "./tsconfig.node.json" }]
