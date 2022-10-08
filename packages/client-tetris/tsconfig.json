@@ -25,6 +25,7 @@
     "components/*": ["components/*"],
     "const/*": ["const/*"],
     "domain/*": ["domain/*"],
+    "layout/*": ["layout/*"],
     "pages/*": ["pages/*"],
     "utils/*": ["utils/*"]
   },
