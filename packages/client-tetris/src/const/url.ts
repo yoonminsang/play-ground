@@ -1,4 +1,4 @@
-export const URL = {
+export const mUrl = {
   toString: () => '/',
   local: {
     toString: () => '/local',
