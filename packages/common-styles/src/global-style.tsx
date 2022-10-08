@@ -96,7 +96,7 @@ const style = (theme: Theme) => css`
   }
 
   // for toast
-  :root {
+  /* :root {
     --toastify-color-light: #fff;
     --toastify-color-dark: #121212;
     --toastify-color-info: #3498db;
@@ -128,7 +128,7 @@ const style = (theme: Theme) => css`
     --toastify-color-progress-success: var(--toastify-color-success);
     --toastify-color-progress-warning: var(--toastify-color-warning);
     --toastify-color-progress-error: var(--toastify-color-error);
-  }
+  } */
 `;
 
 export const GlobalStyle = (): ReactElement => {
