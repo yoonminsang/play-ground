@@ -47,6 +47,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-use-before-define': 'off',
     'no-restricted-exports': 'off',
+    'no-underscore-dangle': 'off',
     'max-classes-per-file': 'off',
 
     'jest/no-export': 'off',
