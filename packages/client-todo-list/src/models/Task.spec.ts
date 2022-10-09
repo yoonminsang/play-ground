@@ -27,7 +27,7 @@ describe('Task Model', () => {
     });
   });
 
-  context('setter, getter', () => {
+  context('getter, setter', () => {
     let task: Task;
     beforeEach(() => {
       task = new Task({ title: TITLE });

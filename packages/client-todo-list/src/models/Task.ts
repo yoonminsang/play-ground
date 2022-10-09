@@ -15,17 +15,17 @@ class Task {
     return { title: this.title, isCompleted: this.isCompleted };
   }
 
-  set title(title: string) {
-    this._title = title;
-  }
   get title() {
     return this._title;
   }
-  set isCompleted(isCompleted: boolean) {
-    this._isCompleted = isCompleted;
+  set title(title: string) {
+    this._title = title;
   }
   get isCompleted() {
     return this._isCompleted;
+  }
+  set isCompleted(isCompleted: boolean) {
+    this._isCompleted = isCompleted;
   }
 }
 
