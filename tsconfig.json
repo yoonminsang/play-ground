@@ -21,6 +21,9 @@
       "path": "packages/client-tetris"
     },
     {
+      "path": "packages/client-todo-list"
+    },
+    {
       "path": "packages/common-components"
     },
     {
