@@ -20,6 +20,12 @@ class TodoStore extends Store<TodoStoreSnapShot> {
     this.update();
   }
 
+  public removeFolder(folder: Folder) {
+    this.folders.delete(folder);
+
+    this.update();
+  }
+
   private update() {
     this.takeSnapshot();
     this.publish();

@@ -5,18 +5,38 @@ import TodoStore from './TodoStore';
 const TITLE = 'title';
 
 describe('TodoStore', () => {
-  it('defualt', () => {
-    const todoStore = new TodoStore();
+  let handleChange: jest.Mock;
+  let todoStore: TodoStore;
+  beforeAll(() => {
+    handleChange = jest.fn();
+  });
+  beforeEach(() => {
+    todoStore = new TodoStore();
+  });
 
-    const handleChange = jest.fn();
-
+  it('addFolder', () => {
     todoStore.addListener(handleChange);
 
     const folder = new Folder(TITLE);
+
     todoStore.addFolder(folder);
 
     expect(handleChange).toHaveBeenCalled();
-
     expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+  });
+
+  it('removeFolder', () => {
+    todoStore.addListener(handleChange);
+
+    const folder = new Folder(TITLE);
+
+    todoStore.addFolder(folder);
+
+    expect(handleChange).toHaveBeenCalled();
+    expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+
+    todoStore.removeFolder(folder);
+
+    expect(todoStore.getSnapshot().folders.has(folder)).toBeFalsy();
   });
 });
