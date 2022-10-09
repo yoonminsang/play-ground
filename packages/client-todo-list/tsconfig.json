@@ -1,0 +1,34 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "allowJs": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "types": ["vite-plugin-svgr/client", "@emotion/react/types/css-prop"],
+    "baseUrl": "src"
+  },
+  "include": [
+    "src",
+    ".storybook/*",
+    "../common-styles/src/emotion.d.ts",
+    "@types/*",
+    "jest.setup.ts",
+    "jest.config.cjs",
+    "scripts/*"
+  ],
+  "paths": {
+    "assets/*": ["assets/*"],
+    "components/*": ["components/*"],
+    "const/*": ["const/*"],
+    "domain/*": ["domain/*"],
+    "layout/*": ["layout/*"],
+    "pages/*": ["pages/*"],
+    "types/*": ["types/*"],
+    "utils/*": ["utils/*"]
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

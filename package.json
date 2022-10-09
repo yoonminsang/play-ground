@@ -4,6 +4,7 @@
   "scripts": {
     "client-setting": "yarn workspace client-setting",
     "client-tetris": "yarn workspace client-tetris",
+    "client-todo-list": "yarn workspace client-todo-list",
     "common-components": "yarn workspace @common/components",
     "common-const": "yarn workspace @common/const",
     "common-hooks": "yarn workspace @common/hooks",
@@ -13,7 +14,7 @@
     "common-utils": "yarn workspace @common/utils",
     "server": "yarn workspace server",
     "postinstall": "husky install",
-    "test": "yarn workspaces foreach --parallel --include client-a --include @common/components --include @common/utils run test"
+    "test": "yarn workspaces foreach --parallel --include client-setting --include client-tetris --include client-todo-list --include @common/components --include @common/utils run test"
   },
   "workspaces": [
     "packages/*"

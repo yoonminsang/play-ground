@@ -123,6 +123,16 @@ module.exports = {
       },
     },
     {
+      files: ['packages/client-todo-list/**/*.ts?(x)', 'packages/client-todo-list/**/*.js?(x)'],
+      settings: {
+        'import/resolver': {
+          typescript: {
+            project: path.resolve(`${__dirname}/packages/client-todo-list/tsconfig.json`),
+          },
+        },
+      },
+    },
+    {
       files: ['packages/common-components/**/*.ts?(x)', 'packages/common-components/**/*.js?(x)'],
       settings: {
         'import/resolver': {
