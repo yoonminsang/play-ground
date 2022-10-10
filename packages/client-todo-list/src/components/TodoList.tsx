@@ -34,9 +34,14 @@ const TodoList: FC<Props> = () => {
           flex-direction: column;
           gap: 5px;
           li {
+            display: flex;
+            gap: 10px;
             list-style: inside;
             &.selected {
               color: ${theme.color.blue500};
+            }
+            .btn-remove {
+              color: ${theme.color.red500};
             }
           }
         }
@@ -56,6 +61,15 @@ const TodoList: FC<Props> = () => {
                   }}
                 >
                   {folder.title}
+                </button>
+                <button
+                  className="btn-remove"
+                  type="button"
+                  onClick={() => {
+                    todoStore.removeFolder(folder);
+                  }}
+                >
+                  X
                 </button>
               </li>
             );
