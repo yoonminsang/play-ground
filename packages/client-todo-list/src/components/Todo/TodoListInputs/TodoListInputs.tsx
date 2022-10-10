@@ -1,12 +1,11 @@
 import { FC, FormEvent, useCallback, useState } from 'react';
 
-import { css } from '@emotion/react';
-
 import { useTodoStore } from 'hooks/useTodoStore';
 import Folder from 'models/Folder';
 import Task from 'models/Task';
+import { Input } from 'components/common';
 
-import Input from './Input';
+import * as S from './style';
 
 interface Props {}
 const TodoListInputs: FC<Props> = () => {
@@ -35,26 +34,7 @@ const TodoListInputs: FC<Props> = () => {
   );
 
   return (
-    <div
-      css={(theme) => css`
-        display: flex;
-        gap: 10px;
-        .input-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
-          label {
-            ${theme.typo.labelM}
-          }
-          input {
-            border: 1px solid ${theme.color.grey500};
-            border-radius: 10px;
-            padding: 0 5px;
-            ${theme.typo.bodyM}
-          }
-        }
-      `}
-    >
+    <div css={S.wrapperStyle}>
       <form onSubmit={handleFolderSubmit}>
         <Input
           label="folder"
