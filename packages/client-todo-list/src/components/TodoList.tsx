@@ -69,8 +69,7 @@ const TodoList: FC<Props> = () => {
             folders[selectedFolderIndex].tasks.map(({ title, isCompleted }, index) => {
               return (
                 <li key={index}>
-                  {isCompleted ? 'complete' : 'incomplete'}
-                  {title}
+                  {isCompleted ? 'complete' : 'incomplete'} {title}
                 </li>
               );
             })}
