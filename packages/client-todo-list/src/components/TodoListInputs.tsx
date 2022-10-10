@@ -44,7 +44,13 @@ const TodoListInputs: FC<Props> = () => {
           setFolderValue('');
         }}
       >
-        <Input label="folder" type="text" value={folderValue} onChange={(e) => setFolderValue(e.target.value)} />
+        <Input
+          label="folder"
+          type="text"
+          value={folderValue}
+          onChange={(e) => setFolderValue(e.target.value)}
+          required
+        />
       </form>
       {selectedFolderIndex !== null && (
         <form
@@ -54,7 +60,7 @@ const TodoListInputs: FC<Props> = () => {
             setTaskValue('');
           }}
         >
-          <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} />
+          <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} required />
         </form>
       )}
     </div>
