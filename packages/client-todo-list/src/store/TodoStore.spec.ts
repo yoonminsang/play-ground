@@ -1,4 +1,5 @@
 import Folder from 'models/Folder';
+import Task from 'models/Task';
 
 import TodoStore from './TodoStore';
 
@@ -104,5 +105,15 @@ describe('TodoStore', () => {
       expect(todoStore.getSnapshot().folders.length).toBe(2);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
     });
+  });
+
+  it('addTask', () => {
+    const folder = new Folder(TITLE);
+    todoStore.addFolder(folder);
+    todoStore.addTask(folder, new Task({ title: TITLE }));
+
+    const task = todoStore.getSnapshot().folders[0].tasks[0];
+    expect(task.title).toBe(TITLE);
+    expect(task.isCompleted).toBeFalsy();
   });
 });

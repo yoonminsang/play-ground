@@ -1,4 +1,5 @@
 import Folder from 'models/Folder';
+import Task from 'models/Task';
 
 import Store from './Store';
 
@@ -30,6 +31,12 @@ class TodoStore extends Store<TodoStoreSnapShot> {
     } else {
       this._selectedFolderIndex = null;
     }
+
+    this.update();
+  }
+
+  public addTask(folder: Folder, task: Task) {
+    this.folders.find((v) => v === folder)?.addTask(task);
 
     this.update();
   }
