@@ -7,7 +7,7 @@ class Task {
     this._isCompleted = isCompleted;
   }
 
-  toggle() {
+  public toggle() {
     this._isCompleted = !this._isCompleted;
   }
 

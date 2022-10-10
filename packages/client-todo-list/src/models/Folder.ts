@@ -9,11 +9,11 @@ class Folder {
     this._tasks = new Set<Task>();
   }
 
-  addTask(task: Task) {
+  public addTask(task: Task) {
     this._tasks.add(task);
   }
 
-  removeTask(task: Task) {
+  public removeTask(task: Task) {
     this._tasks.delete(task);
   }
 
