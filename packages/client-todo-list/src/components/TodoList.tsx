@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import type { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 import { css } from '@emotion/react';
 import classNames from 'classnames';
@@ -9,6 +9,10 @@ import { useTodoStore } from 'hooks/useTodoStore';
 interface Props {}
 const TodoList: FC<Props> = () => {
   const [{ folders, selectedFolderIndex }, todoStore] = useTodoStore();
+
+  const getCurrentFolder = useCallback(() => {
+    return folders[selectedFolderIndex as number];
+  }, [folders, selectedFolderIndex]);
 
   return (
     <div
@@ -80,14 +84,14 @@ const TodoList: FC<Props> = () => {
         <h1>Task</h1>
         <ul>
           {selectedFolderIndex !== null &&
-            folders[selectedFolderIndex].tasks.map((task, index) => {
+            getCurrentFolder().tasks.map((task, index) => {
               const { title, isCompleted } = task;
               return (
                 <li key={index}>
                   <button
                     type="button"
                     onClick={() => {
-                      todoStore.toggleTask(folders[selectedFolderIndex], task);
+                      todoStore.toggleTask(getCurrentFolder(), task);
                     }}
                   >
                     {isCompleted ? 'complete' : 'incomplete'} {title}
@@ -96,7 +100,7 @@ const TodoList: FC<Props> = () => {
                     className="btn-remove"
                     type="button"
                     onClick={() => {
-                      todoStore.removeTask(folders[selectedFolderIndex], task);
+                      todoStore.removeTask(getCurrentFolder(), task);
                     }}
                   >
                     X
