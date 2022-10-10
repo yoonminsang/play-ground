@@ -1,9 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 import type { FC } from 'react';
 
 import { css } from '@emotion/react';
 
+import { useTodoStore } from 'hooks/useTodoStore';
+
 interface Props {}
 const TodoList: FC<Props> = () => {
+  const [{ folders, selectedFolderIndex }] = useTodoStore();
+
   return (
     <div
       css={(theme) => css`
@@ -36,17 +41,23 @@ const TodoList: FC<Props> = () => {
       <div>
         <h1>Folder</h1>
         <ul>
-          <li>folder1</li>
-          <li>folder2</li>
-          <li>folder3</li>
+          {[...folders.values()].map((folder, index) => {
+            return <li key={index}>{folder.title}</li>;
+          })}
         </ul>
       </div>
       <div>
         <h1>Task</h1>
         <ul>
-          <li>task1</li>
-          <li>task2</li>
-          <li>task3</li>
+          {selectedFolderIndex !== null &&
+            folders[selectedFolderIndex].tasks.map(({ title, isCompleted }, index) => {
+              return (
+                <li key={index}>
+                  {isCompleted ? 'complete' : 'incomplete'}
+                  {title}
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>
