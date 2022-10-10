@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, FormEvent, useCallback, useState } from 'react';
 
 import { css } from '@emotion/react';
 
@@ -14,6 +14,25 @@ const TodoListInputs: FC<Props> = () => {
 
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');
+
+  const handleFolderSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const folder = new Folder(folderValue);
+      todoStore.addFolder(folder);
+      setFolderValue('');
+    },
+    [folderValue, todoStore],
+  );
+
+  const handleTaskSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      todoStore.addTask(folders[selectedFolderIndex as number], new Task({ title: taskValue }));
+      setTaskValue('');
+    },
+    [folders, selectedFolderIndex, taskValue, todoStore],
+  );
 
   return (
     <div
@@ -36,14 +55,7 @@ const TodoListInputs: FC<Props> = () => {
         }
       `}
     >
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const folder = new Folder(folderValue);
-          todoStore.addFolder(folder);
-          setFolderValue('');
-        }}
-      >
+      <form onSubmit={handleFolderSubmit}>
         <Input
           label="folder"
           type="text"
@@ -53,13 +65,7 @@ const TodoListInputs: FC<Props> = () => {
         />
       </form>
       {selectedFolderIndex !== null && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            todoStore.addTask(folders[selectedFolderIndex], new Task({ title: taskValue }));
-            setTaskValue('');
-          }}
-        >
+        <form onSubmit={handleTaskSubmit}>
           <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} required />
         </form>
       )}
