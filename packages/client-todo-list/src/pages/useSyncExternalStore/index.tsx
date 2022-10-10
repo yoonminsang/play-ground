@@ -65,7 +65,7 @@ const UseSyncExternalStorePage: FC<Props> = () => {
               onChange={(e) => setTaskValue(e.target.value)}
               onKeyUp={(e) => {
                 if (e.code === 'Enter') {
-                  [...todoStore.folders.values()][selectedFolderIndex].addTask(new Task({ title: taskValue }));
+                  todoStore.folders[selectedFolderIndex].addTask(new Task({ title: taskValue }));
                   setTaskValue('');
                 }
               }}
