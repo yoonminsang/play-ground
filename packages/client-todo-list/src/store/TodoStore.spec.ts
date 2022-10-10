@@ -116,4 +116,17 @@ describe('TodoStore', () => {
     expect(task.title).toBe(TITLE);
     expect(task.isCompleted).toBeFalsy();
   });
+
+  it('toggleTask', () => {
+    const folder = new Folder(TITLE);
+    todoStore.addFolder(folder);
+    todoStore.addTask(folder, new Task({ title: TITLE }));
+
+    const task = todoStore.getSnapshot().folders[0].tasks[0];
+    expect(task.isCompleted).toBeFalsy();
+    todoStore.toggleTask(folder, task);
+    expect(task.isCompleted).toBeTruthy();
+    todoStore.toggleTask(folder, task);
+    expect(task.isCompleted).toBeFalsy();
+  });
 });

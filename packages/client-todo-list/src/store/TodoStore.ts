@@ -41,6 +41,15 @@ class TodoStore extends Store<TodoStoreSnapShot> {
     this.update();
   }
 
+  public toggleTask(folder: Folder, task: Task) {
+    this.folders
+      .find((v) => v === folder)
+      ?.tasks.find((v) => v === task)
+      ?.toggle();
+
+    this.update();
+  }
+
   private update() {
     this.takeSnapshot();
     this.publish();
