@@ -2,8 +2,7 @@ import { FC } from 'react';
 
 import { css } from '@emotion/react';
 
-import { TodoList } from 'components';
-import TodoListInputs from 'components/TodoListInputs';
+import { TodoListInputs, TodoList } from 'components';
 
 interface Props {}
 const UseSyncExternalStorePage: FC<Props> = () => {
