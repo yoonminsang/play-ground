@@ -11,10 +11,6 @@ class Task {
     this._isCompleted = !this._isCompleted;
   }
 
-  get info() {
-    return { title: this._title, isCompleted: this._isCompleted };
-  }
-
   get title() {
     return this._title;
   }

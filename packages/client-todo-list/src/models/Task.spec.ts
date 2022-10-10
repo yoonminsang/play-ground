@@ -17,13 +17,11 @@ describe('Task Model', () => {
       const task = new Task({ title: TITLE });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(false);
-      expect(task.info).toEqual({ title: TITLE, isCompleted: false });
     });
     it('title, isCompleted를 넣은 경우', () => {
       const task = new Task({ title: TITLE, isCompleted: true });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(true);
-      expect(task.info).toEqual({ title: TITLE, isCompleted: true });
     });
   });
 
@@ -35,12 +33,10 @@ describe('Task Model', () => {
     it('set title', () => {
       task.title = TITLE2;
       expect(task.title).toBe(TITLE2);
-      expect(task.info.title).toBe(TITLE2);
     });
     it('set isCompleted', () => {
       task.isCompleted = true;
       expect(task.isCompleted).toBe(true);
-      expect(task.info.isCompleted).toBe(true);
     });
   });
 });
