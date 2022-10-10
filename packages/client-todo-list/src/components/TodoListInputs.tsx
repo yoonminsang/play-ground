@@ -10,7 +10,7 @@ import Input from './Input';
 
 interface Props {}
 const TodoListInputs: FC<Props> = () => {
-  const [{ selectedFolderIndex }, todoStore] = useTodoStore();
+  const [{ folders, selectedFolderIndex }, todoStore] = useTodoStore();
 
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');
@@ -57,7 +57,7 @@ const TodoListInputs: FC<Props> = () => {
           onChange={(e) => setTaskValue(e.target.value)}
           onKeyUp={(e) => {
             if (e.code === 'Enter') {
-              todoStore.folders[selectedFolderIndex].addTask(new Task({ title: taskValue }));
+              todoStore.addTask(folders[selectedFolderIndex], new Task({ title: taskValue }));
               setTaskValue('');
             }
           }}
