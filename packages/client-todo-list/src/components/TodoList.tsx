@@ -66,10 +66,18 @@ const TodoList: FC<Props> = () => {
         <h1>Task</h1>
         <ul>
           {selectedFolderIndex !== null &&
-            folders[selectedFolderIndex].tasks.map(({ title, isCompleted }, index) => {
+            folders[selectedFolderIndex].tasks.map((task, index) => {
+              const { title, isCompleted } = task;
               return (
                 <li key={index}>
-                  {isCompleted ? 'complete' : 'incomplete'} {title}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      todoStore.toggleTask(folders[selectedFolderIndex], task);
+                    }}
+                  >
+                    {isCompleted ? 'complete' : 'incomplete'} {title}
+                  </button>
                 </li>
               );
             })}
