@@ -3,13 +3,13 @@ import Folder from 'models/Folder';
 import Store from './Store';
 
 export type TodoStoreSnapShot = {
-  folders: Set<Folder>;
+  folders: Folder[];
   selectedFolderIndex: number | null;
 };
 
 class TodoStore extends Store<TodoStoreSnapShot> {
-  public folders = new Set<Folder>();
-  public selectedFolderIndex: null | number = null;
+  private _folders = new Set<Folder>();
+  private _selectedFolderIndex: null | number = null;
 
   constructor() {
     super();
@@ -17,21 +17,25 @@ class TodoStore extends Store<TodoStoreSnapShot> {
   }
 
   public addFolder(folder: Folder) {
-    this.folders.add(folder);
-    this.selectedFolderIndex = [...this.folders.values()].indexOf(folder);
+    this._folders.add(folder);
+    this._selectedFolderIndex = this.folders.indexOf(folder);
 
     this.update();
   }
 
   public removeFolder(folder: Folder) {
-    this.folders.delete(folder);
-    if (this.folders.size) {
-      this.selectedFolderIndex = 0;
+    this._folders.delete(folder);
+    if (this._folders.size) {
+      this._selectedFolderIndex = 0;
     } else {
-      this.selectedFolderIndex = null;
+      this._selectedFolderIndex = null;
     }
 
     this.update();
+  }
+
+  public get folders() {
+    return [...this._folders.values()];
   }
 
   private update() {
@@ -42,7 +46,7 @@ class TodoStore extends Store<TodoStoreSnapShot> {
   private takeSnapshot() {
     this.snapshot = {
       folders: this.folders,
-      selectedFolderIndex: this.selectedFolderIndex,
+      selectedFolderIndex: this._selectedFolderIndex,
     };
   }
 }

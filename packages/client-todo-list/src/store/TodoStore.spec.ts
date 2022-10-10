@@ -25,8 +25,8 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder);
 
       expect(handleChange).toHaveBeenCalled();
-      expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
-      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().folders.includes(folder)).toBeTruthy();
+      expect(todoStore.getSnapshot().folders.length).toBe(1);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
     });
 
@@ -34,7 +34,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(new Folder(TITLE));
       todoStore.addFolder(new Folder(TITLE));
 
-      expect(todoStore.getSnapshot().folders.size).toBe(2);
+      expect(todoStore.getSnapshot().folders.length).toBe(2);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
     });
 
@@ -44,7 +44,7 @@ describe('TodoStore', () => {
         todoStore.addFolder(new Folder(TITLE));
       }
 
-      expect(todoStore.getSnapshot().folders.size).toBe(n);
+      expect(todoStore.getSnapshot().folders.length).toBe(n);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(n - 1);
     });
   });
@@ -58,12 +58,12 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder);
 
       expect(handleChange).toHaveBeenCalled();
-      expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+      expect(todoStore.getSnapshot().folders.includes(folder)).toBeTruthy();
 
       todoStore.removeFolder(folder);
 
-      expect(todoStore.getSnapshot().folders.has(folder)).toBeFalsy();
-      expect(todoStore.getSnapshot().folders.size).toBe(0);
+      expect(todoStore.getSnapshot().folders.includes(folder)).toBeFalsy();
+      expect(todoStore.getSnapshot().folders.length).toBe(0);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(null);
     });
 
@@ -75,7 +75,7 @@ describe('TodoStore', () => {
 
       todoStore.removeFolder(folder);
 
-      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().folders.length).toBe(1);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
     });
   });
@@ -88,7 +88,7 @@ describe('TodoStore', () => {
 
       const folder2 = new Folder(TITLE);
       todoStore.addFolder(folder2);
-      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().folders.length).toBe(1);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
     });
     it('2개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 1', () => {
@@ -101,7 +101,7 @@ describe('TodoStore', () => {
 
       const folder3 = new Folder(TITLE);
       todoStore.addFolder(folder3);
-      expect(todoStore.getSnapshot().folders.size).toBe(2);
+      expect(todoStore.getSnapshot().folders.length).toBe(2);
       expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
     });
   });
