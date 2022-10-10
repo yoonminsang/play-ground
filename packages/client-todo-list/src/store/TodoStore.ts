@@ -52,6 +52,7 @@ class TodoStore extends Store<TodoStoreSnapShot> {
 
   public set selectedFolderIndex(selectedFolderIndex: number | null) {
     this._selectedFolderIndex = selectedFolderIndex;
+    this.update();
   }
 }
 
