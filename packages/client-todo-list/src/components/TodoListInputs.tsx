@@ -36,32 +36,26 @@ const TodoListInputs: FC<Props> = () => {
         }
       `}
     >
-      <Input
-        label="folder"
-        type="text"
-        value={folderValue}
-        onChange={(e) => setFolderValue(e.target.value)}
-        onKeyUp={(e) => {
-          if (e.code === 'Enter') {
-            const folder = new Folder(folderValue);
-            todoStore.addFolder(folder);
-            setFolderValue('');
-          }
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const folder = new Folder(folderValue);
+          todoStore.addFolder(folder);
+          setFolderValue('');
         }}
-      />
+      >
+        <Input label="folder" type="text" value={folderValue} onChange={(e) => setFolderValue(e.target.value)} />
+      </form>
       {selectedFolderIndex !== null && (
-        <Input
-          label="task"
-          type="text"
-          value={taskValue}
-          onChange={(e) => setTaskValue(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.code === 'Enter') {
-              todoStore.addTask(folders[selectedFolderIndex], new Task({ title: taskValue }));
-              setTaskValue('');
-            }
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            todoStore.addTask(folders[selectedFolderIndex], new Task({ title: taskValue }));
+            setTaskValue('');
           }}
-        />
+        >
+          <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} />
+        </form>
       )}
     </div>
   );
