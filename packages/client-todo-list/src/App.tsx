@@ -1,16 +1,19 @@
 import { FC } from 'react';
 
-import { Button } from '@common/components';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+
+import RootPage from 'pages';
 import 'react-toastify/dist/ReactToastify.css';
+import UseSyncExternalStorePage from 'pages/useSyncExternalStore';
 
 const App: FC = () => {
   return (
-    <div className="App">
-      앱
-      <Button size="md" variant="filled" color="red">
-        button
-      </Button>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootPage />} />
+        <Route path="/useSyncExternalStore" element={<UseSyncExternalStorePage />} />
+      </Routes>
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
@@ -22,7 +25,7 @@ const App: FC = () => {
         draggable
         pauseOnHover={false}
       />
-    </div>
+    </BrowserRouter>
   );
 };
 
