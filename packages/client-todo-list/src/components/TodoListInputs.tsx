@@ -6,6 +6,8 @@ import { useTodoStore } from 'hooks/useTodoStore';
 import Folder from 'models/Folder';
 import Task from 'models/Task';
 
+import Input from './Input';
+
 interface Props {}
 const TodoListInputs: FC<Props> = () => {
   const [{ selectedFolderIndex }, todoStore] = useTodoStore();
@@ -34,38 +36,32 @@ const TodoListInputs: FC<Props> = () => {
         }
       `}
     >
-      <div className="input-wrapper">
-        <label htmlFor="folder">folder</label>
-        <input
-          id="folder"
+      <Input
+        label="folder"
+        type="text"
+        value={folderValue}
+        onChange={(e) => setFolderValue(e.target.value)}
+        onKeyUp={(e) => {
+          if (e.code === 'Enter') {
+            const folder = new Folder(folderValue);
+            todoStore.addFolder(folder);
+            setFolderValue('');
+          }
+        }}
+      />
+      {selectedFolderIndex !== null && (
+        <Input
+          label="task"
           type="text"
-          value={folderValue}
-          onChange={(e) => setFolderValue(e.target.value)}
+          value={taskValue}
+          onChange={(e) => setTaskValue(e.target.value)}
           onKeyUp={(e) => {
             if (e.code === 'Enter') {
-              const folder = new Folder(folderValue);
-              todoStore.addFolder(folder);
-              setFolderValue('');
+              todoStore.folders[selectedFolderIndex].addTask(new Task({ title: taskValue }));
+              setTaskValue('');
             }
           }}
         />
-      </div>
-      {selectedFolderIndex !== null && (
-        <div className="input-wrapper">
-          <label htmlFor="task">task</label>
-          <input
-            id="task"
-            type="text"
-            value={taskValue}
-            onChange={(e) => setTaskValue(e.target.value)}
-            onKeyUp={(e) => {
-              if (e.code === 'Enter') {
-                todoStore.folders[selectedFolderIndex].addTask(new Task({ title: taskValue }));
-                setTaskValue('');
-              }
-            }}
-          />
-        </div>
       )}
     </div>
   );
