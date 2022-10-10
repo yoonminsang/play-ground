@@ -4,6 +4,8 @@ import TodoStore from './TodoStore';
 
 const TITLE = 'title';
 
+const context = describe;
+
 describe('TodoStore', () => {
   let handleChange: jest.Mock;
   let todoStore: TodoStore;
@@ -14,29 +16,93 @@ describe('TodoStore', () => {
     todoStore = new TodoStore();
   });
 
-  it('addFolder', () => {
-    todoStore.addListener(handleChange);
+  context('when addFolder', () => {
+    it('하나를 추가하는 경우 selectedFolderIndex는 0', () => {
+      todoStore.addListener(handleChange);
 
-    const folder = new Folder(TITLE);
+      const folder = new Folder(TITLE);
 
-    todoStore.addFolder(folder);
+      todoStore.addFolder(folder);
 
-    expect(handleChange).toHaveBeenCalled();
-    expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+      expect(handleChange).toHaveBeenCalled();
+      expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
+    });
+
+    it('두 개를 추가하는 경우 selectedFolderIndex는 1', () => {
+      todoStore.addFolder(new Folder(TITLE));
+      todoStore.addFolder(new Folder(TITLE));
+
+      expect(todoStore.getSnapshot().folders.size).toBe(2);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
+    });
+
+    it('n 개를 추가하는 경우 selectedFolderIndex는 n-1', () => {
+      const n = 100;
+      for (let i = 0; i < n; i++) {
+        todoStore.addFolder(new Folder(TITLE));
+      }
+
+      expect(todoStore.getSnapshot().folders.size).toBe(n);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(n - 1);
+    });
   });
 
-  it('removeFolder', () => {
-    todoStore.addListener(handleChange);
+  context('when removeFolder', () => {
+    it('1개에서 1개를 제거하는 경우 selectedFolderIndex는 null', () => {
+      todoStore.addListener(handleChange);
 
-    const folder = new Folder(TITLE);
+      const folder = new Folder(TITLE);
 
-    todoStore.addFolder(folder);
+      todoStore.addFolder(folder);
 
-    expect(handleChange).toHaveBeenCalled();
-    expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
+      expect(handleChange).toHaveBeenCalled();
+      expect(todoStore.getSnapshot().folders.has(folder)).toBeTruthy();
 
-    todoStore.removeFolder(folder);
+      todoStore.removeFolder(folder);
 
-    expect(todoStore.getSnapshot().folders.has(folder)).toBeFalsy();
+      expect(todoStore.getSnapshot().folders.has(folder)).toBeFalsy();
+      expect(todoStore.getSnapshot().folders.size).toBe(0);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(null);
+    });
+
+    it('2개에서 1개를 제거하는 경우 selectedFolderIndex는 0', () => {
+      const folder = new Folder(TITLE);
+      const folder2 = new Folder(TITLE);
+      todoStore.addFolder(folder);
+      todoStore.addFolder(folder2);
+
+      todoStore.removeFolder(folder);
+
+      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
+    });
+  });
+
+  context('when addFolder and removeFolder', () => {
+    it('1개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 0', () => {
+      const folder = new Folder(TITLE);
+      todoStore.addFolder(folder);
+      todoStore.removeFolder(folder);
+
+      const folder2 = new Folder(TITLE);
+      todoStore.addFolder(folder2);
+      expect(todoStore.getSnapshot().folders.size).toBe(1);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
+    });
+    it('2개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 1', () => {
+      const folder = new Folder(TITLE);
+      todoStore.addFolder(folder);
+      const folder2 = new Folder(TITLE);
+      todoStore.addFolder(folder2);
+
+      todoStore.removeFolder(folder);
+
+      const folder3 = new Folder(TITLE);
+      todoStore.addFolder(folder3);
+      expect(todoStore.getSnapshot().folders.size).toBe(2);
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
+    });
   });
 });
