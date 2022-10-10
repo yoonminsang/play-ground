@@ -92,6 +92,15 @@ const TodoList: FC<Props> = () => {
                   >
                     {isCompleted ? 'complete' : 'incomplete'} {title}
                   </button>
+                  <button
+                    className="btn-remove"
+                    type="button"
+                    onClick={() => {
+                      todoStore.removeTask(folders[selectedFolderIndex], task);
+                    }}
+                  >
+                    X
+                  </button>
                 </li>
               );
             })}
