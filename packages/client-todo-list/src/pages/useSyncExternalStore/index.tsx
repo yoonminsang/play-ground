@@ -9,11 +9,10 @@ import Task from 'models/Task';
 
 interface Props {}
 const UseSyncExternalStorePage: FC<Props> = () => {
-  const [{ folders }, todoStore] = useTodoStore();
+  const [{ selectedFolderIndex }, todoStore] = useTodoStore();
 
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');
-  const [selectedFolderIndex, setSelectedFolderIndex] = useState<number | null>(null);
 
   return (
     <div
@@ -51,7 +50,6 @@ const UseSyncExternalStorePage: FC<Props> = () => {
               if (e.code === 'Enter') {
                 const folder = new Folder(folderValue);
                 todoStore.addFolder(folder);
-                setSelectedFolderIndex([...folders.values()].indexOf(folder));
                 setFolderValue('');
               }
             }}
