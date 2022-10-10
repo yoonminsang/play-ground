@@ -31,7 +31,7 @@ describe('Folder Model', () => {
     expect(folder.tasks.size).toBe(0);
   });
 
-  context('getter, setter', () => {
+  context('when getter, setter', () => {
     it('set title', () => {
       folder.title = TITLE2;
       expect(folder.title).toBe(TITLE2);

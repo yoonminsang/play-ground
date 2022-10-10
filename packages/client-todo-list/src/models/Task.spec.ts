@@ -12,7 +12,7 @@ describe('Task Model', () => {
     expect(task.isCompleted).toBe(true);
   });
 
-  context('task 생성', () => {
+  context('when task 생성', () => {
     it('title만 넣은 경우', () => {
       const task = new Task({ title: TITLE });
       expect(task.title).toBe(TITLE);
@@ -27,7 +27,7 @@ describe('Task Model', () => {
     });
   });
 
-  context('getter, setter', () => {
+  context('when getter, setter', () => {
     let task: Task;
     beforeEach(() => {
       task = new Task({ title: TITLE });
