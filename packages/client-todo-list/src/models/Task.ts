@@ -12,7 +12,7 @@ class Task {
   }
 
   get info() {
-    return { title: this.title, isCompleted: this.isCompleted };
+    return { title: this._title, isCompleted: this._isCompleted };
   }
 
   get title() {
