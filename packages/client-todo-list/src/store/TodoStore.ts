@@ -34,14 +34,6 @@ class TodoStore extends Store<TodoStoreSnapShot> {
     this.update();
   }
 
-  private get folders() {
-    return [...this._folders.values()];
-  }
-
-  public set selectedFolderIndex(selectedFolderIndex: number | null) {
-    this._selectedFolderIndex = selectedFolderIndex;
-  }
-
   private update() {
     this.takeSnapshot();
     this.publish();
@@ -52,6 +44,14 @@ class TodoStore extends Store<TodoStoreSnapShot> {
       folders: this.folders,
       selectedFolderIndex: this._selectedFolderIndex,
     };
+  }
+
+  private get folders() {
+    return [...this._folders.values()];
+  }
+
+  public set selectedFolderIndex(selectedFolderIndex: number | null) {
+    this._selectedFolderIndex = selectedFolderIndex;
   }
 }
 
