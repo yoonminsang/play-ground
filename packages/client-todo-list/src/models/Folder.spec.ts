@@ -20,15 +20,15 @@ describe('Folder Model', () => {
 
   it('addTask', () => {
     folder.addTask(task);
-    expect(folder.tasks.has(task)).toBeTruthy();
-    expect(folder.tasks.size).toBe(1);
+    expect(folder.tasks.includes(task)).toBeTruthy();
+    expect(folder.tasks.length).toBe(1);
   });
 
   it('removeTask', () => {
     folder.addTask(task);
     folder.removeTask(task);
-    expect(folder.tasks.has(task)).toBeFalsy();
-    expect(folder.tasks.size).toBe(0);
+    expect(folder.tasks.includes(task)).toBeFalsy();
+    expect(folder.tasks.length).toBe(0);
   });
 
   context('when getter, setter', () => {

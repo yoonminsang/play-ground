@@ -10,11 +10,11 @@ class Folder {
   }
 
   addTask(task: Task) {
-    this.tasks.add(task);
+    this._tasks.add(task);
   }
 
   removeTask(task: Task) {
-    this.tasks.delete(task);
+    this._tasks.delete(task);
   }
 
   get title() {
@@ -24,7 +24,7 @@ class Folder {
     this._title = title;
   }
   get tasks() {
-    return this._tasks;
+    return [...this._tasks.values()];
   }
 }
 
