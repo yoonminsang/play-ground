@@ -2,12 +2,13 @@
 import type { FC } from 'react';
 
 import { css } from '@emotion/react';
+import classNames from 'classnames';
 
 import { useTodoStore } from 'hooks/useTodoStore';
 
 interface Props {}
 const TodoList: FC<Props> = () => {
-  const [{ folders, selectedFolderIndex }] = useTodoStore();
+  const [{ folders, selectedFolderIndex }, todoStore] = useTodoStore();
 
   return (
     <div
@@ -34,6 +35,9 @@ const TodoList: FC<Props> = () => {
           gap: 5px;
           li {
             list-style: inside;
+            &.selected {
+              color: ${theme.color.blue500};
+            }
           }
         }
       `}
@@ -42,7 +46,19 @@ const TodoList: FC<Props> = () => {
         <h1>Folder</h1>
         <ul>
           {[...folders.values()].map((folder, index) => {
-            return <li key={index}>{folder.title}</li>;
+            return (
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              <li key={index} className={classNames({ selected: selectedFolderIndex === index })}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    todoStore.selectedFolderIndex = index;
+                  }}
+                >
+                  {folder.title}
+                </button>
+              </li>
+            );
           })}
         </ul>
       </div>
