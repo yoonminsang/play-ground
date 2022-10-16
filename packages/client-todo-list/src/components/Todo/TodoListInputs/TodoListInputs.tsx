@@ -1,15 +1,22 @@
 import { FC, FormEvent, useCallback, useState } from 'react';
 
-import { useTodoStore } from 'hooks/useTodoStore';
 import Folder from 'models/Folder';
 import Task from 'models/Task';
 import { Input } from 'components/common';
+import { useStore } from 'lib/store';
+import { todoStore } from 'store/TodoStore';
 
 import * as S from './style';
 
 interface Props {}
 const TodoListInputs: FC<Props> = () => {
-  const [{ folders, selectedFolderIndex }, todoStore] = useTodoStore();
+  const [
+    {
+      snapshot: { folders, selectedFolderIndex },
+    },
+    store,
+  ] = useStore(todoStore);
+  console.log(folders, selectedFolderIndex);
 
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');
@@ -18,19 +25,19 @@ const TodoListInputs: FC<Props> = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const folder = new Folder(folderValue);
-      todoStore.addFolder(folder);
+      store.addFolder(folder);
       setFolderValue('');
     },
-    [folderValue, todoStore],
+    [folderValue, store],
   );
 
   const handleTaskSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      todoStore.addTask(folders[selectedFolderIndex as number], new Task({ title: taskValue }));
+      store.addTask(folders[selectedFolderIndex as number], new Task({ title: taskValue }));
       setTaskValue('');
     },
-    [folders, selectedFolderIndex, taskValue, todoStore],
+    [folders, selectedFolderIndex, taskValue, store],
   );
 
   return (
