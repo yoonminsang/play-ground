@@ -36,24 +36,27 @@ class TodoStore extends Store<TodoStoreSnapShot> {
   }
 
   public addTask(folder: Folder, task: Task) {
-    this.folders.find((v) => v === folder)?.addTask(task);
+    this.findFolder(folder)?.addTask(task);
 
     this.update();
   }
 
   public removeTask(folder: Folder, task: Task) {
-    this.folders.find((v) => v === folder)?.removeTask(task);
+    this.findFolder(folder)?.removeTask(task);
 
     this.update();
   }
 
   public toggleTask(folder: Folder, task: Task) {
-    this.folders
-      .find((v) => v === folder)
+    this.findFolder(folder)
       ?.tasks.find((v) => v === task)
       ?.toggle();
 
     this.update();
+  }
+
+  private findFolder(folder: Folder) {
+    return this.folders.find((v) => v === folder);
   }
 
   private update() {
