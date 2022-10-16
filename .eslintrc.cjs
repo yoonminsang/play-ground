@@ -104,6 +104,13 @@ module.exports = {
       },
     },
     {
+      files: ['**/*.spec.ts?(x)', '**/*.test.ts?(x)'],
+      rules: {
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+      },
+    },
+    {
       files: ['packages/client-setting/**/*.ts?(x)', 'packages/client-setting/**/*.js?(x)'],
       settings: {
         'import/resolver': {
