@@ -1,29 +1,19 @@
+import { Action, Store } from 'lib/store';
 import Folder from 'models/Folder';
 import Task from 'models/Task';
 
-import Store from './Store';
-
-export type TodoStoreSnapShot = {
-  folders: Folder[];
-  selectedFolderIndex: number | null;
-};
-
-class TodoStore extends Store<TodoStoreSnapShot> {
+@Store()
+class TodoStore {
   private _folders = new Set<Folder>();
   private _selectedFolderIndex: null | number = null;
 
-  constructor() {
-    super();
-    this.takeSnapshot();
-  }
-
+  @Action()
   public addFolder(folder: Folder) {
     this._folders.add(folder);
     this._selectedFolderIndex = this.folders.indexOf(folder);
-
-    this.update();
   }
 
+  @Action()
   public removeFolder(folder: Folder) {
     this._folders.delete(folder);
     if (this._folders.size) {
@@ -31,51 +21,47 @@ class TodoStore extends Store<TodoStoreSnapShot> {
     } else {
       this._selectedFolderIndex = null;
     }
-
-    this.update();
   }
 
+  @Action()
   public addTask(folder: Folder, task: Task) {
     this.folders.find((v) => v === folder)?.addTask(task);
-
-    this.update();
   }
 
+  @Action()
   public removeTask(folder: Folder, task: Task) {
     this.folders.find((v) => v === folder)?.removeTask(task);
-
-    this.update();
   }
 
+  @Action()
   public toggleTask(folder: Folder, task: Task) {
+    console.log('toggle task');
     this.folders
       .find((v) => v === folder)
       ?.tasks.find((v) => v === task)
       ?.toggle();
-
-    this.update();
-  }
-
-  private update() {
-    this.takeSnapshot();
-    this.publish();
-  }
-
-  private takeSnapshot() {
-    this.snapshot = {
-      folders: this.folders,
-      selectedFolderIndex: this._selectedFolderIndex,
-    };
   }
 
   private get folders() {
     return [...this._folders.values()];
   }
 
-  public set selectedFolderIndex(selectedFolderIndex: number | null) {
+  @Action()
+  // TODO: setter 가능하게 수정
+  // public set selectedFolderIndex(selectedFolderIndex: number | null) {
+  public setSelectedFolderIndex(selectedFolderIndex: number | null) {
     this._selectedFolderIndex = selectedFolderIndex;
-    this.update();
+  }
+
+  // TODO: 옵저버패턴적용, abstract 적용?
+  public get snapshot() {
+    return {
+      folders: this.folders,
+      selectedFolderIndex: this._selectedFolderIndex,
+    };
   }
 }
 
 export default TodoStore;
+
+export const todoStore = new TodoStore();
