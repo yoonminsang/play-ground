@@ -17,7 +17,6 @@ describe('TodoStore', () => {
     todoStore = new TodoStore();
   });
 
-  // TODO: selectedFolderIndex 케이스 추가(빠트림...)
   context('when addFolder', () => {
     it('하나를 추가하는 경우 selectedFolderIndex는 0', () => {
       todoStore.addListener(handleChange);
@@ -166,5 +165,28 @@ describe('TodoStore', () => {
     expect(task.isCompleted).toBeFalsy();
 
     expect(handleChange).toHaveBeenCalled();
+  });
+
+  context('when getter, setter', () => {
+    it('set selectedFolderIndex', () => {
+      const folder = new Folder(TITLE);
+      const folder2 = new Folder(TITLE);
+      const folder3 = new Folder(TITLE);
+
+      todoStore.addFolder(folder);
+      todoStore.addFolder(folder2);
+      todoStore.addFolder(folder3);
+
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(2);
+
+      todoStore.selectedFolderIndex = 0;
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(0);
+
+      todoStore.selectedFolderIndex = 1;
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(1);
+
+      todoStore.selectedFolderIndex = 2;
+      expect(todoStore.getSnapshot().selectedFolderIndex).toBe(2);
+    });
   });
 });
