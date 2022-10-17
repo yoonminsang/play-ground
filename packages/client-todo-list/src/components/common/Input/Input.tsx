@@ -9,7 +9,7 @@ const Input: FC<Props> = ({ label, ...otherProps }) => {
   const id = useId();
   return (
     <div css={S.wrapperStyle}>
-      {label && <label htmlFor={id}>folder</label>}
+      {label && <label htmlFor={id}>{label}</label>}
       <input id={id} {...otherProps} />
     </div>
   );

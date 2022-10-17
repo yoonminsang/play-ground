@@ -18493,6 +18493,7 @@ __metadata:
   resolution: "yarn-berry-monorepo-template@workspace:."
   dependencies:
     "@emotion/eslint-plugin": ^11.10.0
+    "@emotion/react": ^11.10.4
     "@typescript-eslint/eslint-plugin": ^5.27.0
     "@typescript-eslint/parser": ^5.27.0
     eslint: 8.2.0

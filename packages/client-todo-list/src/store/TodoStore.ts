@@ -25,18 +25,17 @@ class TodoStore {
 
   @Action()
   public addTask(folder: Folder, task: Task) {
-    this.folders.find((v) => v === folder)?.addTask(task);
+    this.findFolder(folder)?.addTask(task);
   }
 
   @Action()
   public removeTask(folder: Folder, task: Task) {
-    this.folders.find((v) => v === folder)?.removeTask(task);
+    this.findFolder(folder)?.removeTask(task);
   }
 
   @Action()
   public toggleTask(folder: Folder, task: Task) {
-    this.folders
-      .find((v) => v === folder)
+    this.findFolder(folder)
       ?.tasks.find((v) => v === task)
       ?.toggle();
   }
@@ -46,10 +45,12 @@ class TodoStore {
   }
 
   @Action()
-  // TODO: setter 가능하게 수정
-  // public set selectedFolderIndex(selectedFolderIndex: number | null) {
   public setSelectedFolderIndex(selectedFolderIndex: number | null) {
     this._selectedFolderIndex = selectedFolderIndex;
+  }
+
+  private findFolder(folder: Folder) {
+    return this.folders.find((v) => v === folder);
   }
 
   // TODO: 옵저버패턴적용, abstract 적용?

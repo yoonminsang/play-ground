@@ -69,6 +69,9 @@ describe('TodoStore', () => {
 
       expect(todoStore.snapshot.folders.length).toBe(1);
       expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
+
+      expect(todoStore.snapshot.folders.length).toBe(1);
+      expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
     });
   });
 
@@ -84,7 +87,7 @@ describe('TodoStore', () => {
       expect(todoStore.snapshot.folders.length).toBe(1);
       expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
     });
-    it('2개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 1', () => {
+    it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderIndex는 1', () => {
       const folder = new Folder(TITLE);
       todoStore.addFolder(folder);
       const folder2 = new Folder(TITLE);
@@ -135,5 +138,27 @@ describe('TodoStore', () => {
     todoStore.toggleTask(folder, task);
     expect(task.isCompleted).toBeFalsy();
   });
-  // selected case 추가
+
+  context('when getter, setter', () => {
+    it('set selectedFolderIndex', () => {
+      const folder = new Folder(TITLE);
+      const folder2 = new Folder(TITLE);
+      const folder3 = new Folder(TITLE);
+
+      todoStore.addFolder(folder);
+      todoStore.addFolder(folder2);
+      todoStore.addFolder(folder3);
+
+      expect(todoStore.snapshot.selectedFolderIndex).toBe(2);
+
+      todoStore.setSelectedFolderIndex(0);
+      expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
+
+      todoStore.setSelectedFolderIndex(1);
+      expect(todoStore.snapshot.selectedFolderIndex).toBe(1);
+
+      todoStore.setSelectedFolderIndex(2);
+      expect(todoStore.snapshot.selectedFolderIndex).toBe(2);
+    });
+  });
 });
