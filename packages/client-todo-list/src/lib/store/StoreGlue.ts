@@ -1,13 +1,10 @@
 import { areEqual, getPrototypeOf, ownKeys, getGetterKeys, takeSnapshot, attachGetters } from './utils';
 
 export default class StoreGlue {
-  propertyKeys: (string | symbol)[];
-
-  getterKeys: (string | symbol)[];
-
-  listeners = new Set<() => void>();
-
-  snapshot = {};
+  private propertyKeys: (string | symbol)[];
+  private getterKeys: (string | symbol)[];
+  private listeners = new Set<() => void>();
+  private snapshot = {};
 
   constructor(store: object) {
     this.propertyKeys = ownKeys(store);
