@@ -3,13 +3,19 @@ import { FC, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { useTodoStore } from 'hooks/useTodoStore';
+import { useStore } from 'lib/store';
+import { todoStore } from 'store/TodoStore';
 
 import * as S from './style';
 
 interface Props {}
 const TodoList: FC<Props> = () => {
-  const [{ folders, selectedFolderIndex }, todoStore] = useTodoStore();
+  const [
+    {
+      snapshot: { folders, selectedFolderIndex },
+    },
+    store,
+  ] = useStore(todoStore);
 
   const getCurrentFolder = useCallback(() => {
     return folders[selectedFolderIndex as number];
@@ -27,7 +33,7 @@ const TodoList: FC<Props> = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    todoStore.selectedFolderIndex = index;
+                    store.setSelectedFolderIndex(index);
                   }}
                 >
                   {folder.title}
@@ -36,7 +42,7 @@ const TodoList: FC<Props> = () => {
                   className="btn-remove"
                   type="button"
                   onClick={() => {
-                    todoStore.removeFolder(folder);
+                    store.removeFolder(folder);
                   }}
                 >
                   X
@@ -57,7 +63,7 @@ const TodoList: FC<Props> = () => {
                   <button
                     type="button"
                     onClick={() => {
-                      todoStore.toggleTask(getCurrentFolder(), task);
+                      store.toggleTask(getCurrentFolder(), task);
                     }}
                   >
                     {isCompleted ? 'complete' : 'incomplete'} {title}
@@ -66,7 +72,7 @@ const TodoList: FC<Props> = () => {
                     className="btn-remove"
                     type="button"
                     onClick={() => {
-                      todoStore.removeTask(getCurrentFolder(), task);
+                      store.removeTask(getCurrentFolder(), task);
                     }}
                   >
                     X

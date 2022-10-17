@@ -19,6 +19,9 @@ export default defineConfig({
             },
           ],
         ],
+        parserOpts: {
+          plugins: ['decorators-legacy', 'classProperties'],
+        },
       },
     }),
     svgr(),
