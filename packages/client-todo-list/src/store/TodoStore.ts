@@ -53,7 +53,6 @@ class TodoStore {
     return this.folders.find((v) => v === folder);
   }
 
-  // TODO: 옵저버패턴적용, abstract 적용?
   public get snapshot() {
     return {
       folders: this.folders,

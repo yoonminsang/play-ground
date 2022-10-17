@@ -33,7 +33,6 @@ const TodoList: FC<Props> = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    // store.selectedFolderIndex = index;
                     store.setSelectedFolderIndex(index);
                   }}
                 >
