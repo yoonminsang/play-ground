@@ -35,7 +35,6 @@ class TodoStore {
 
   @Action()
   public toggleTask(folder: Folder, task: Task) {
-    console.log('toggle task');
     this.folders
       .find((v) => v === folder)
       ?.tasks.find((v) => v === task)

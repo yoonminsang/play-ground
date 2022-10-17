@@ -16,7 +16,6 @@ const TodoListInputs: FC<Props> = () => {
     },
     store,
   ] = useStore(todoStore);
-  console.log(folders, selectedFolderIndex);
 
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');

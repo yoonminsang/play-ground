@@ -16,7 +16,6 @@ const TodoList: FC<Props> = () => {
     },
     store,
   ] = useStore(todoStore);
-  console.log(folders, selectedFolderIndex);
 
   const getCurrentFolder = useCallback(() => {
     return folders[selectedFolderIndex as number];

@@ -27,7 +27,6 @@ export function Action() {
   return (target: object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const method = descriptor.value;
     descriptor.value = function decorator(...args: unknown[]) {
-      console.log('action');
       const returnValue = method.apply(this, args);
       Reflect.get(this, STORE_GLUE_PROPERTY_KEY).update(this);
       return returnValue;
