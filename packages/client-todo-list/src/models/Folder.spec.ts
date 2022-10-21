@@ -31,6 +31,13 @@ describe('Folder Model', () => {
     expect(folder.tasks.length).toBe(0);
   });
 
+  it('toggleTask', () => {
+    folder = folder.addTask(task);
+    expect(folder.tasks[0].isCompleted).toBeFalsy();
+    folder = folder.toggleTask(task) as Folder;
+    expect(folder.tasks[0].isCompleted).toBeTruthy();
+  });
+
   context('when getter, setter', () => {
     it('set title', () => {
       folder = folder.setTitle(TITLE2);

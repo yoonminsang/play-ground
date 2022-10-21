@@ -20,6 +20,22 @@ class Folder {
     );
   }
 
+  public toggleTask(task: Task) {
+    const findTask = this.findTask(task);
+    if (!findTask) return;
+    return new Folder(
+      this.title,
+      this._tasks.map((_task) => {
+        if (_task === task) return findTask.toggle();
+        return _task;
+      }),
+    );
+  }
+
+  private findTask(task: Task) {
+    return this._tasks.find((_task) => _task === task);
+  }
+
   get title() {
     return this._title;
   }
