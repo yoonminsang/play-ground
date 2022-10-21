@@ -9,15 +9,7 @@ type KeyType = string | symbol;
 
 export function areEqual(a: object, b: object) {
   const keys = Reflect.ownKeys(a);
-  return (
-    keys.length === Reflect.ownKeys(b).length &&
-    keys.every(
-      (key) =>
-        typeof Reflect.get(a, key) !== 'object' &&
-        typeof Reflect.get(b, key) !== 'object' &&
-        Reflect.get(a, key) === Reflect.get(b, key),
-    )
-  );
+  return keys.length === Reflect.ownKeys(b).length && keys.every((key) => Reflect.get(a, key) === Reflect.get(b, key));
 }
 
 export function getPrototypeOf(target: object): object {
