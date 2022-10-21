@@ -6,20 +6,22 @@ const TITLE = 'title';
 const TITLE2 = 'title2';
 
 describe('Task Model', () => {
+  let task: Task;
+
   it('toggle', () => {
-    const task = new Task({ title: TITLE });
-    task.toggle();
+    task = new Task({ title: TITLE });
+    task = task.toggle();
     expect(task.isCompleted).toBe(true);
   });
 
   context('when task 생성', () => {
     it('title만 넣은 경우', () => {
-      const task = new Task({ title: TITLE });
+      task = new Task({ title: TITLE });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(false);
     });
     it('title, isCompleted를 넣은 경우', () => {
-      const task = new Task({ title: TITLE, isCompleted: true });
+      task = new Task({ title: TITLE, isCompleted: true });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(true);
     });
@@ -31,11 +33,11 @@ describe('Task Model', () => {
       task = new Task({ title: TITLE });
     });
     it('set title', () => {
-      task.title = TITLE2;
+      task = task.setTitle(TITLE2);
       expect(task.title).toBe(TITLE2);
     });
     it('set isCompleted', () => {
-      task.isCompleted = true;
+      task = task.setIsCompleted(true);
       expect(task.isCompleted).toBe(true);
     });
   });

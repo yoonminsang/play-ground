@@ -8,20 +8,20 @@ class Task {
   }
 
   public toggle() {
-    this._isCompleted = !this._isCompleted;
+    return new Task({ title: this._title, isCompleted: !this._isCompleted });
   }
 
-  get title() {
+  public get title() {
     return this._title;
   }
-  set title(title: string) {
-    this._title = title;
+  public setTitle(title: string) {
+    return new Task({ title, isCompleted: this._isCompleted });
   }
-  get isCompleted() {
+  public get isCompleted() {
     return this._isCompleted;
   }
-  set isCompleted(isCompleted: boolean) {
-    this._isCompleted = isCompleted;
+  public setIsCompleted(isCompleted: boolean) {
+    return new Task({ title: this._title, isCompleted });
   }
 }
 
