@@ -2,29 +2,32 @@ import Task from './Task';
 
 class Folder {
   private _title: string;
-  private _tasks: Set<Task>;
+  private _tasks: Task[];
 
-  constructor(title: string) {
+  constructor(title: string, tasks: Task[] = []) {
     this._title = title;
-    this._tasks = new Set<Task>();
+    this._tasks = tasks;
   }
 
   public addTask(task: Task) {
-    this._tasks.add(task);
+    return new Folder(this.title, [...this._tasks, task]);
   }
 
   public removeTask(task: Task) {
-    this._tasks.delete(task);
+    return new Folder(
+      this.title,
+      this._tasks.filter((_task) => _task !== task),
+    );
   }
 
   get title() {
     return this._title;
   }
-  set title(title: string) {
-    this._title = title;
+  setTitle(title: string) {
+    return new Folder(title, this._tasks);
   }
   get tasks() {
-    return [...this._tasks.values()];
+    return this._tasks;
   }
 }
 

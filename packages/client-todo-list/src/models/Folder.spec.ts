@@ -19,21 +19,21 @@ describe('Folder Model', () => {
   });
 
   it('addTask', () => {
-    folder.addTask(task);
+    folder = folder.addTask(task);
     expect(folder.tasks.includes(task)).toBeTruthy();
     expect(folder.tasks.length).toBe(1);
   });
 
   it('removeTask', () => {
-    folder.addTask(task);
-    folder.removeTask(task);
+    folder = folder.addTask(task);
+    folder = folder.removeTask(task);
     expect(folder.tasks.includes(task)).toBeFalsy();
     expect(folder.tasks.length).toBe(0);
   });
 
   context('when getter, setter', () => {
     it('set title', () => {
-      folder.title = TITLE2;
+      folder = folder.setTitle(TITLE2);
       expect(folder.title).toBe(TITLE2);
     });
   });
