@@ -33,7 +33,7 @@ describe('TodoStore', () => {
 
       expect(todoStore.snapshot.folders.length).toBe(n);
 
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(getLastFolderId(todoStore));
     });
   });
 
@@ -62,7 +62,7 @@ describe('TodoStore', () => {
       todoStore.removeFolder(folder);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(getLastFolderId(todoStore));
     });
   });
 
@@ -79,7 +79,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder2);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(getLastFolderId(todoStore));
     });
     it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderId는 마지막 folder id', () => {
       const folder = new Folder({ title: TITLE });
@@ -93,7 +93,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder3);
 
       expect(todoStore.snapshot.folders.length).toBe(2);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(getLastFolderId(todoStore));
     });
   });
 
@@ -156,3 +156,9 @@ describe('TodoStore', () => {
     expect(todoStore.currentFolder).toEqual(folder);
   });
 });
+
+const getLastFolderId = (todoStore: TodoStore) => {
+  const lastFolder = todoStore.snapshot.folders.at(-1);
+  if (!lastFolder) throw new Error('마지막 폴더가 없음');
+  return lastFolder.id;
+};
