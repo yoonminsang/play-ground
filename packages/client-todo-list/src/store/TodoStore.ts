@@ -6,21 +6,21 @@ import Task from 'models/Task';
 class TodoStore {
   private _folders: Folder[] = [];
   // TODO: selectedFolderId로 변경할 예정. 그 후에는 selectedFolder로 변경할 예정.
-  private _selectedFolderIndex: null | number = null;
+  private _selectedFolderId: null | number = null;
 
   @Action()
   public addFolder(folder: Folder) {
     this._folders = [...this._folders, folder];
-    this._selectedFolderIndex = folder.id;
+    this._selectedFolderId = folder.id;
   }
 
   @Action()
   public removeFolder(folder: Folder) {
     this._folders = this._folders.filter((_folder) => _folder !== folder);
     if (this._folders.length) {
-      this._selectedFolderIndex = this._folders[0].id;
+      this._selectedFolderId = this._folders[0].id;
     } else {
-      this._selectedFolderIndex = null;
+      this._selectedFolderId = null;
     }
   }
 
@@ -56,7 +56,7 @@ class TodoStore {
 
   @Action()
   public setSelectedFolderIndex(selectedFolderIndex: number | null) {
-    this._selectedFolderIndex = selectedFolderIndex;
+    this._selectedFolderId = selectedFolderIndex;
   }
 
   private findFolder(folder: Folder) {
@@ -67,7 +67,7 @@ class TodoStore {
   public get snapshot() {
     return {
       folders: this._folders,
-      selectedFolderIndex: this._selectedFolderIndex,
+      selectedFolderIndex: this._selectedFolderId,
     };
   }
 }
