@@ -46,10 +46,12 @@ describe('Task Model', () => {
     it('set title', () => {
       task = task.setTitle(TITLE2);
       expect(task.title).toBe(TITLE2);
+      expect(task.id).toBe(1);
     });
     it('set isCompleted', () => {
       task = task.setIsCompleted(true);
       expect(task.isCompleted).toBe(true);
+      expect(task.id).toBe(1);
     });
   });
 });
