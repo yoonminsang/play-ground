@@ -41,7 +41,7 @@ const TodoListInputs: FC<Props> = () => {
   );
 
   return (
-    <div css={S.wrapperStyle}>
+    <S.Wrapper>
       <form onSubmit={handleFolderSubmit}>
         <Input
           label="folder"
@@ -56,7 +56,7 @@ const TodoListInputs: FC<Props> = () => {
           <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} required />
         </form>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 
