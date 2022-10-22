@@ -1,6 +1,6 @@
-import { css, Theme } from '@emotion/react';
+import styled from '@emotion/styled';
 
-export const wrapperStyle = (theme: Theme) => css`
+export const Wrapper = styled.div`
   display: flex;
   margin: 20px;
   > div {
@@ -8,14 +8,20 @@ export const wrapperStyle = (theme: Theme) => css`
     flex-direction: column;
     gap: 10px;
   }
-  div:nth-of-type(1) {
+  > div:nth-of-type(1) {
     flex: 1;
   }
-  div:nth-of-type(2) {
+  > div:nth-of-type(2) {
     flex: 5;
   }
+`;
+
+export const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   h1 {
-    ${theme.typo.titleL}
+    ${(props) => props.theme.typo.titleL}
   }
   ul {
     display: flex;
@@ -26,10 +32,10 @@ export const wrapperStyle = (theme: Theme) => css`
       gap: 10px;
       list-style: inside;
       &.selected {
-        color: ${theme.color.blue500};
+        color: ${(props) => props.theme.color.blue500};
       }
       .btn-remove {
-        color: ${theme.color.red500};
+        color: ${(props) => props.theme.color.red500};
       }
     }
   }
