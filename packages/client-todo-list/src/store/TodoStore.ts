@@ -68,6 +68,10 @@ class TodoStore {
       selectedFolderId: this._selectedFolderId,
     };
   }
+
+  public get currentFolder() {
+    return this._folders.find((folder) => folder.id === this._selectedFolderId);
+  }
 }
 
 export default TodoStore;

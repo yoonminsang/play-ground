@@ -1,10 +1,9 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 
 import classNames from 'classnames';
 
 import { useStore } from 'lib/store';
 import { todoStore } from 'store/TodoStore';
-import Folder from 'models/Folder';
 
 import * as S from './style';
 
@@ -13,13 +12,10 @@ const TodoList: FC<Props> = () => {
   const [
     {
       snapshot: { folders, selectedFolderId },
+      currentFolder,
     },
     store,
   ] = useStore(todoStore);
-
-  const getCurrentFolder = useCallback(() => {
-    return folders.find((folder) => folder.id === (selectedFolderId as number)) as Folder;
-  }, [folders, selectedFolderId]);
 
   return (
     <div css={S.wrapperStyle}>
@@ -55,14 +51,15 @@ const TodoList: FC<Props> = () => {
         <h1>Task</h1>
         <ul>
           {selectedFolderId !== null &&
-            getCurrentFolder().tasks.map((task) => {
+            currentFolder &&
+            currentFolder.tasks.map((task) => {
               const { title, isCompleted } = task;
               return (
                 <li key={task.id}>
                   <button
                     type="button"
                     onClick={() => {
-                      store.toggleTask(getCurrentFolder(), task);
+                      store.toggleTask(currentFolder, task);
                     }}
                   >
                     {isCompleted ? 'complete' : 'incomplete'} {title}
@@ -71,7 +68,7 @@ const TodoList: FC<Props> = () => {
                     className="btn-remove"
                     type="button"
                     onClick={() => {
-                      store.removeTask(getCurrentFolder(), task);
+                      store.removeTask(currentFolder, task);
                     }}
                   >
                     X

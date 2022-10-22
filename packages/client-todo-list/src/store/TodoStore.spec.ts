@@ -156,4 +156,10 @@ describe('TodoStore', () => {
       expect(todoStore.snapshot.selectedFolderId).toBe(2);
     });
   });
+  // TODO: 테스트 추가
+  it('get currentFolder', () => {
+    const folder = new Folder({ title: TITLE });
+    todoStore.addFolder(folder);
+    expect(todoStore.currentFolder).toEqual(folder);
+  });
 });
