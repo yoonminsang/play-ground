@@ -8,10 +8,21 @@ const TITLE2 = 'title2';
 describe('Task Model', () => {
   let task: Task;
 
+  beforeEach(() => {
+    Task.ID = 1;
+  });
+
   it('toggle', () => {
     task = new Task({ title: TITLE });
     task = task.toggle();
     expect(task.isCompleted).toBe(true);
+  });
+
+  it('id auto increment 확인', () => {
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(1);
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(2);
   });
 
   context('when task 생성', () => {
