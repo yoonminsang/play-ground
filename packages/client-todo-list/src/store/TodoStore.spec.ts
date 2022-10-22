@@ -15,7 +15,7 @@ describe('TodoStore', () => {
   });
 
   context('when addFolder', () => {
-    it('하나를 추가하는 경우 selectedFolderIndex는 0', () => {
+    it('하나를 추가하는 경우', () => {
       const folder = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
@@ -25,27 +25,20 @@ describe('TodoStore', () => {
       expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
     });
 
-    it('두 개를 추가하는 경우 selectedFolderIndex는 1', () => {
-      todoStore.addFolder(new Folder({ title: TITLE }));
-      todoStore.addFolder(new Folder({ title: TITLE }));
-
-      expect(todoStore.snapshot.folders.length).toBe(2);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[1].id);
-    });
-
-    it('n 개를 추가하는 경우 selectedFolderIndex는 n-1', () => {
+    it('n 개를 추가하는 경우 selectedFolderId는 마지막 folder id', () => {
       const n = 100;
       for (let i = 0; i < n; i++) {
         todoStore.addFolder(new Folder({ title: TITLE }));
       }
 
       expect(todoStore.snapshot.folders.length).toBe(n);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[100 - 1].id);
+
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
     });
   });
 
   context('when removeFolder', () => {
-    it('1개에서 1개를 제거하는 경우 selectedFolderIndex는 null', () => {
+    it('1개에서 1개를 제거하는 경우 selectedFolderId는 null', () => {
       const folder = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
@@ -59,7 +52,7 @@ describe('TodoStore', () => {
       expect(todoStore.snapshot.selectedFolderId).toBe(null);
     });
 
-    it('2개에서 1개를 제거하는 경우 selectedFolderIndex는 0', () => {
+    it('2개에서 1개를 제거하는 경우 selectedFolderId는 마지막 folder id', () => {
       const folder = new Folder({ title: TITLE });
       const folder2 = new Folder({ title: TITLE });
 
@@ -69,12 +62,12 @@ describe('TodoStore', () => {
       todoStore.removeFolder(folder);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
     });
   });
 
   context('when addFolder and removeFolder', () => {
-    it('1개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 0', () => {
+    it('1개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderId는 마지막 folder id', () => {
       const folder = new Folder({ title: TITLE });
       expect(todoStore.snapshot.folders.length).toBe(0);
       todoStore.addFolder(folder);
@@ -86,9 +79,9 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder2);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
     });
-    it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderIndex는 1', () => {
+    it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderId는 마지막 folder id', () => {
       const folder = new Folder({ title: TITLE });
       todoStore.addFolder(folder);
       const folder2 = new Folder({ title: TITLE });
@@ -100,7 +93,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder3);
 
       expect(todoStore.snapshot.folders.length).toBe(2);
-      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[1].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders.at(-1)?.id);
     });
   });
 
