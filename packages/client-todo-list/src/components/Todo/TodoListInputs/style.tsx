@@ -1,6 +1,6 @@
-import { css, Theme } from '@emotion/react';
+import styled from '@emotion/styled';
 
-export const wrapperStyle = (theme: Theme) => css`
+export const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   .input-wrapper {
@@ -8,13 +8,13 @@ export const wrapperStyle = (theme: Theme) => css`
     flex-direction: column;
     gap: 3px;
     label {
-      ${theme.typo.labelM}
+      ${(props) => props.theme.typo.labelM}
     }
     input {
-      border: 1px solid ${theme.color.grey500};
+      border: 1px solid ${(props) => props.theme.color.grey500};
       border-radius: 10px;
       padding: 0 5px;
-      ${theme.typo.bodyM}
+      ${(props) => props.theme.typo.bodyM}
     }
   }
 `;

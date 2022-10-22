@@ -4,60 +4,73 @@ import Task from 'models/Task';
 
 @Store()
 class TodoStore {
-  private _folders = new Set<Folder>();
-  private _selectedFolderIndex: null | number = null;
+  private _folders: Folder[] = [];
+  private _selectedFolderId: null | number = null;
 
   @Action()
   public addFolder(folder: Folder) {
-    this._folders.add(folder);
-    this._selectedFolderIndex = this.folders.indexOf(folder);
+    this._folders = [...this._folders, folder];
+    this._selectedFolderId = folder.id;
   }
 
   @Action()
   public removeFolder(folder: Folder) {
-    this._folders.delete(folder);
-    if (this._folders.size) {
-      this._selectedFolderIndex = 0;
+    this._folders = this._folders.filter((_folder) => _folder !== folder);
+    if (this._folders.length) {
+      this._selectedFolderId = this._folders[0].id;
     } else {
-      this._selectedFolderIndex = null;
+      this._selectedFolderId = null;
     }
   }
 
   @Action()
   public addTask(folder: Folder, task: Task) {
-    this.findFolder(folder)?.addTask(task);
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.addTask(task);
+      return _folder;
+    });
   }
 
   @Action()
   public removeTask(folder: Folder, task: Task) {
-    this.findFolder(folder)?.removeTask(task);
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.removeTask(task);
+      return _folder;
+    });
   }
 
   @Action()
   public toggleTask(folder: Folder, task: Task) {
-    this.findFolder(folder)
-      ?.tasks.find((v) => v === task)
-      ?.toggle();
-  }
-
-  private get folders() {
-    return [...this._folders.values()];
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.toggleTask(task) as Folder;
+      return _folder;
+    });
   }
 
   @Action()
-  public setSelectedFolderIndex(selectedFolderIndex: number | null) {
-    this._selectedFolderIndex = selectedFolderIndex;
+  public setSelectedFolderId(selectedFolderIndex: number | null) {
+    this._selectedFolderId = selectedFolderIndex;
   }
 
   private findFolder(folder: Folder) {
-    return this.folders.find((v) => v === folder);
+    return this._folders.find((v) => v === folder);
   }
 
   public get snapshot() {
     return {
-      folders: this.folders,
-      selectedFolderIndex: this._selectedFolderIndex,
+      folders: this._folders,
+      selectedFolderId: this._selectedFolderId,
     };
+  }
+
+  public get currentFolder() {
+    return this._folders.find((folder) => folder.id === this._selectedFolderId);
   }
 }
 

@@ -12,7 +12,8 @@ interface Props {}
 const TodoListInputs: FC<Props> = () => {
   const [
     {
-      snapshot: { folders, selectedFolderIndex },
+      snapshot: { selectedFolderId },
+      currentFolder,
     },
     store,
   ] = useStore(todoStore);
@@ -23,7 +24,7 @@ const TodoListInputs: FC<Props> = () => {
   const handleFolderSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const folder = new Folder(folderValue);
+      const folder = new Folder({ title: folderValue });
       store.addFolder(folder);
       setFolderValue('');
     },
@@ -33,14 +34,14 @@ const TodoListInputs: FC<Props> = () => {
   const handleTaskSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      store.addTask(folders[selectedFolderIndex as number], new Task({ title: taskValue }));
+      store.addTask(currentFolder as Folder, new Task({ title: taskValue }));
       setTaskValue('');
     },
-    [folders, selectedFolderIndex, taskValue, store],
+    [store, currentFolder, taskValue],
   );
 
   return (
-    <div css={S.wrapperStyle}>
+    <S.Wrapper>
       <form onSubmit={handleFolderSubmit}>
         <Input
           label="folder"
@@ -50,12 +51,12 @@ const TodoListInputs: FC<Props> = () => {
           required
         />
       </form>
-      {selectedFolderIndex !== null && (
+      {selectedFolderId !== null && (
         <form onSubmit={handleTaskSubmit}>
           <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} required />
         </form>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

@@ -6,23 +6,36 @@ const TITLE = 'title';
 const TITLE2 = 'title2';
 
 describe('Task Model', () => {
-  it('toggle', () => {
-    const task = new Task({ title: TITLE });
-    task.toggle();
-    expect(task.isCompleted).toBe(true);
+  let task: Task;
+
+  beforeEach(() => {
+    Task.ID = 1;
   });
 
   context('when task 생성', () => {
     it('title만 넣은 경우', () => {
-      const task = new Task({ title: TITLE });
+      task = new Task({ title: TITLE });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(false);
     });
     it('title, isCompleted를 넣은 경우', () => {
-      const task = new Task({ title: TITLE, isCompleted: true });
+      task = new Task({ title: TITLE, isCompleted: true });
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(true);
     });
+  });
+
+  it('id auto increment', () => {
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(1);
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(2);
+  });
+
+  it('toggle', () => {
+    task = new Task({ title: TITLE });
+    task = task.toggle();
+    expect(task.isCompleted).toBe(true);
   });
 
   context('when getter, setter', () => {
@@ -31,12 +44,14 @@ describe('Task Model', () => {
       task = new Task({ title: TITLE });
     });
     it('set title', () => {
-      task.title = TITLE2;
+      task = task.setTitle(TITLE2);
       expect(task.title).toBe(TITLE2);
+      expect(task.id).toBe(1);
     });
     it('set isCompleted', () => {
-      task.isCompleted = true;
+      task = task.setIsCompleted(true);
       expect(task.isCompleted).toBe(true);
+      expect(task.id).toBe(1);
     });
   });
 });
