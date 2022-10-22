@@ -12,19 +12,6 @@ describe('Task Model', () => {
     Task.ID = 1;
   });
 
-  it('toggle', () => {
-    task = new Task({ title: TITLE });
-    task = task.toggle();
-    expect(task.isCompleted).toBe(true);
-  });
-
-  it('id auto increment 확인', () => {
-    task = new Task({ title: TITLE });
-    expect(task.id).toBe(1);
-    task = new Task({ title: TITLE });
-    expect(task.id).toBe(2);
-  });
-
   context('when task 생성', () => {
     it('title만 넣은 경우', () => {
       task = new Task({ title: TITLE });
@@ -36,6 +23,19 @@ describe('Task Model', () => {
       expect(task.title).toBe(TITLE);
       expect(task.isCompleted).toBe(true);
     });
+  });
+
+  it('id auto increment 확인', () => {
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(1);
+    task = new Task({ title: TITLE });
+    expect(task.id).toBe(2);
+  });
+
+  it('toggle', () => {
+    task = new Task({ title: TITLE });
+    task = task.toggle();
+    expect(task.isCompleted).toBe(true);
   });
 
   context('when getter, setter', () => {
