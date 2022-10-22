@@ -4,19 +4,19 @@ import Task from 'models/Task';
 
 @Store()
 class TodoStore {
-  private _folders = new Set<Folder>();
+  private _folders: Folder[] = [];
   private _selectedFolderIndex: null | number = null;
 
   @Action()
   public addFolder(folder: Folder) {
-    this._folders.add(folder);
-    this._selectedFolderIndex = this.folders.indexOf(folder);
+    this._folders = [...this._folders, folder];
+    this._selectedFolderIndex = this._folders.indexOf(folder);
   }
 
   @Action()
   public removeFolder(folder: Folder) {
-    this._folders.delete(folder);
-    if (this._folders.size) {
+    this._folders = this._folders.filter((_folder) => _folder !== folder);
+    if (this._folders.length) {
       this._selectedFolderIndex = 0;
     } else {
       this._selectedFolderIndex = null;
@@ -25,23 +25,32 @@ class TodoStore {
 
   @Action()
   public addTask(folder: Folder, task: Task) {
-    this.findFolder(folder)?.addTask(task);
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.addTask(task);
+      return _folder;
+    });
   }
 
   @Action()
   public removeTask(folder: Folder, task: Task) {
-    this.findFolder(folder)?.removeTask(task);
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.removeTask(task);
+      return _folder;
+    });
   }
 
   @Action()
   public toggleTask(folder: Folder, task: Task) {
-    this.findFolder(folder)
-      ?.tasks.find((v) => v === task)
-      ?.toggle();
-  }
-
-  private get folders() {
-    return [...this._folders.values()];
+    const findFolder = this.findFolder(folder);
+    if (!findFolder) return;
+    this._folders = this._folders.map((_folder) => {
+      if (_folder === findFolder) return findFolder.toggleTask(task) as Folder;
+      return _folder;
+    });
   }
 
   @Action()
@@ -50,12 +59,13 @@ class TodoStore {
   }
 
   private findFolder(folder: Folder) {
-    return this.folders.find((v) => v === folder);
+    return this._folders.find((v) => v === folder);
   }
 
+  // TODO: 스냅샷이 필요할까? 그냥 getter만 쓰면 어떨까 혹은 멤버변수를 public으로 관리하면 어떨까...
   public get snapshot() {
     return {
-      folders: this.folders,
+      folders: this._folders,
       selectedFolderIndex: this._selectedFolderIndex,
     };
   }

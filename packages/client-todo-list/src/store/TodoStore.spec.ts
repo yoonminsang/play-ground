@@ -78,8 +78,11 @@ describe('TodoStore', () => {
   context('when addFolder and removeFolder', () => {
     it('1개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 0', () => {
       const folder = new Folder(TITLE);
+      expect(todoStore.snapshot.folders.length).toBe(0);
       todoStore.addFolder(folder);
+      expect(todoStore.snapshot.folders.length).toBe(1);
       todoStore.removeFolder(folder);
+      expect(todoStore.snapshot.folders.length).toBe(0);
 
       const folder2 = new Folder(TITLE);
       todoStore.addFolder(folder2);
@@ -104,9 +107,8 @@ describe('TodoStore', () => {
   });
 
   it('addTask', () => {
-    const folder = new Folder(TITLE);
-    todoStore.addFolder(folder);
-    todoStore.addTask(folder, new Task({ title: TITLE }));
+    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
     const task = todoStore.snapshot.folders[0].tasks[0];
 
@@ -115,28 +117,23 @@ describe('TodoStore', () => {
   });
 
   it('removeTask', () => {
-    const folder = new Folder(TITLE);
-    todoStore.addFolder(folder);
-    todoStore.addTask(folder, new Task({ title: TITLE }));
+    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
-    const task = todoStore.snapshot.folders[0].tasks[0];
-    todoStore.removeTask(folder, task);
+    todoStore.removeTask(todoStore.snapshot.folders[0], todoStore.snapshot.folders[0].tasks[0]);
 
     expect(todoStore.snapshot.folders[0].tasks.length).toBe(0);
   });
 
   it('toggleTask', () => {
-    const folder = new Folder(TITLE);
-    todoStore.addFolder(folder);
-    todoStore.addTask(folder, new Task({ title: TITLE }));
+    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
-    const task = todoStore.snapshot.folders[0].tasks[0];
-
-    expect(task.isCompleted).toBeFalsy();
-    todoStore.toggleTask(folder, task);
-    expect(task.isCompleted).toBeTruthy();
-    todoStore.toggleTask(folder, task);
-    expect(task.isCompleted).toBeFalsy();
+    expect(todoStore.snapshot.folders[0].tasks[0].isCompleted).toBeFalsy();
+    todoStore.toggleTask(todoStore.snapshot.folders[0], todoStore.snapshot.folders[0].tasks[0]);
+    expect(todoStore.snapshot.folders[0].tasks[0].isCompleted).toBeTruthy();
+    todoStore.toggleTask(todoStore.snapshot.folders[0], todoStore.snapshot.folders[0].tasks[0]);
+    expect(todoStore.snapshot.folders[0].tasks[0].isCompleted).toBeFalsy();
   });
 
   context('when getter, setter', () => {
