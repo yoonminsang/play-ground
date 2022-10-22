@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import { useStore } from 'lib/store';
 import { todoStore } from 'store/TodoStore';
+import Folder from 'models/Folder';
 
 import * as S from './style';
 
@@ -18,7 +19,7 @@ const TodoList: FC<Props> = () => {
   ] = useStore(todoStore);
 
   const getCurrentFolder = useCallback(() => {
-    return folders[selectedFolderIndex as number];
+    return folders.find((folder) => folder.id === (selectedFolderIndex as number)) as Folder;
   }, [folders, selectedFolderIndex]);
 
   return (
@@ -26,14 +27,14 @@ const TodoList: FC<Props> = () => {
       <div>
         <h1>Folder</h1>
         <ul>
-          {[...folders.values()].map((folder, index) => {
+          {[...folders.values()].map((folder) => {
             return (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              <li key={index} className={classNames({ selected: selectedFolderIndex === index })}>
+              <li key={folder.id} className={classNames({ selected: selectedFolderIndex === folder.id })}>
                 <button
                   type="button"
                   onClick={() => {
-                    store.setSelectedFolderIndex(index);
+                    store.setSelectedFolderIndex(folder.id);
                   }}
                 >
                   {folder.title}
@@ -56,10 +57,10 @@ const TodoList: FC<Props> = () => {
         <h1>Task</h1>
         <ul>
           {selectedFolderIndex !== null &&
-            getCurrentFolder().tasks.map((task, index) => {
+            getCurrentFolder().tasks.map((task) => {
               const { title, isCompleted } = task;
               return (
-                <li key={index}>
+                <li key={task.id}>
                   <button
                     type="button"
                     onClick={() => {

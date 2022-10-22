@@ -20,6 +20,10 @@ const TodoListInputs: FC<Props> = () => {
   const [folderValue, setFolderValue] = useState<string>('');
   const [taskValue, setTaskValue] = useState<string>('');
 
+  const getCurrentFolder = useCallback(() => {
+    return folders.find((folder) => folder.id === (selectedFolderIndex as number)) as Folder;
+  }, [folders, selectedFolderIndex]);
+
   const handleFolderSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -33,10 +37,10 @@ const TodoListInputs: FC<Props> = () => {
   const handleTaskSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      store.addTask(folders[selectedFolderIndex as number], new Task({ title: taskValue }));
+      store.addTask(getCurrentFolder(), new Task({ title: taskValue }));
       setTaskValue('');
     },
-    [folders, selectedFolderIndex, taskValue, store],
+    [store, getCurrentFolder, taskValue],
   );
 
   return (
