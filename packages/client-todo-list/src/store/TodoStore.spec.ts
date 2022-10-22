@@ -146,13 +146,13 @@ describe('TodoStore', () => {
 
       expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[2].id);
 
-      todoStore.setSelectedFolderIndex(0);
+      todoStore.setSelectedFolderId(0);
       expect(todoStore.snapshot.selectedFolderId).toBe(0);
 
-      todoStore.setSelectedFolderIndex(1);
+      todoStore.setSelectedFolderId(1);
       expect(todoStore.snapshot.selectedFolderId).toBe(1);
 
-      todoStore.setSelectedFolderIndex(2);
+      todoStore.setSelectedFolderId(2);
       expect(todoStore.snapshot.selectedFolderId).toBe(2);
     });
   });

@@ -55,7 +55,7 @@ class TodoStore {
   }
 
   @Action()
-  public setSelectedFolderIndex(selectedFolderIndex: number | null) {
+  public setSelectedFolderId(selectedFolderIndex: number | null) {
     this._selectedFolderId = selectedFolderIndex;
   }
 
