@@ -7,7 +7,6 @@ const TITLE = 'title';
 
 const context = describe;
 
-// TODO: selectedFolderIndex 설명 변경
 describe('TodoStore', () => {
   let todoStore: TodoStore;
   beforeEach(() => {
@@ -148,12 +147,16 @@ describe('TodoStore', () => {
       todoStore.setSelectedFolderId(2);
       expect(todoStore.snapshot.selectedFolderId).toBe(2);
     });
-  });
-  // TODO: 테스트 추가
-  it('get currentFolder', () => {
-    const folder = new Folder({ title: TITLE });
-    todoStore.addFolder(folder);
-    expect(todoStore.currentFolder).toEqual(folder);
+
+    it('get currentFolder', () => {
+      const folder = new Folder({ title: TITLE });
+      todoStore.addFolder(folder);
+      expect(todoStore.currentFolder).toEqual(folder);
+
+      const folder2 = new Folder({ title: TITLE });
+      todoStore.addFolder(folder2);
+      expect(todoStore.currentFolder).toEqual(folder2);
+    });
   });
 });
 
