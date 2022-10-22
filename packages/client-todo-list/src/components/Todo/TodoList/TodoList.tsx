@@ -29,7 +29,6 @@ const TodoList: FC<Props> = () => {
         <ul>
           {[...folders.values()].map((folder) => {
             return (
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <li key={folder.id} className={classNames({ selected: selectedFolderId === folder.id })}>
                 <button
                   type="button"
