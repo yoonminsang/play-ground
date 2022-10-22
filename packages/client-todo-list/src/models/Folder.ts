@@ -3,20 +3,30 @@ import Task from './Task';
 class Folder {
   private _title: string;
   private _tasks: Task[];
+  private _id: number;
 
-  constructor(title: string, tasks: Task[] = []) {
+  public static ID = 1;
+
+  constructor(title: string, tasks: Task[] = [], id?: number) {
     this._title = title;
     this._tasks = tasks;
+    if (typeof id === 'number') {
+      this._id = id;
+    } else {
+      this._id = Folder.ID;
+      Folder.ID += 1;
+    }
   }
 
   public addTask(task: Task) {
-    return new Folder(this.title, [...this._tasks, task]);
+    return new Folder(this.title, [...this._tasks, task], this._id);
   }
 
   public removeTask(task: Task) {
     return new Folder(
       this.title,
       this._tasks.filter((_task) => _task !== task),
+      this._id,
     );
   }
 
@@ -29,6 +39,7 @@ class Folder {
         if (_task === task) return findTask.toggle();
         return _task;
       }),
+      this._id,
     );
   }
 
@@ -40,10 +51,13 @@ class Folder {
     return this._title;
   }
   setTitle(title: string) {
-    return new Folder(title, this._tasks);
+    return new Folder(title, this._tasks, this._id);
   }
   get tasks() {
     return this._tasks;
+  }
+  get id() {
+    return this._id;
   }
 }
 
