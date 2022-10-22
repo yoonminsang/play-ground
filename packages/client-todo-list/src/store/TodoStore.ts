@@ -5,19 +5,20 @@ import Task from 'models/Task';
 @Store()
 class TodoStore {
   private _folders: Folder[] = [];
+  // TODO: selectedFolderId로 변경할 예정. 그 후에는 selectedFolder로 변경할 예정.
   private _selectedFolderIndex: null | number = null;
 
   @Action()
   public addFolder(folder: Folder) {
     this._folders = [...this._folders, folder];
-    this._selectedFolderIndex = this._folders.indexOf(folder);
+    this._selectedFolderIndex = folder.id;
   }
 
   @Action()
   public removeFolder(folder: Folder) {
     this._folders = this._folders.filter((_folder) => _folder !== folder);
     if (this._folders.length) {
-      this._selectedFolderIndex = 0;
+      this._selectedFolderIndex = this._folders[0].id;
     } else {
       this._selectedFolderIndex = null;
     }
