@@ -25,7 +25,7 @@ describe('Task Model', () => {
     });
   });
 
-  it('id auto increment 확인', () => {
+  it('id auto increment', () => {
     task = new Task({ title: TITLE });
     expect(task.id).toBe(1);
     task = new Task({ title: TITLE });
