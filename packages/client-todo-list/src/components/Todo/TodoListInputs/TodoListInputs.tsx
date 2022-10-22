@@ -12,7 +12,7 @@ interface Props {}
 const TodoListInputs: FC<Props> = () => {
   const [
     {
-      snapshot: { folders, selectedFolderIndex },
+      snapshot: { folders, selectedFolderId },
     },
     store,
   ] = useStore(todoStore);
@@ -21,8 +21,8 @@ const TodoListInputs: FC<Props> = () => {
   const [taskValue, setTaskValue] = useState<string>('');
 
   const getCurrentFolder = useCallback(() => {
-    return folders.find((folder) => folder.id === (selectedFolderIndex as number)) as Folder;
-  }, [folders, selectedFolderIndex]);
+    return folders.find((folder) => folder.id === (selectedFolderId as number)) as Folder;
+  }, [folders, selectedFolderId]);
 
   const handleFolderSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -54,7 +54,7 @@ const TodoListInputs: FC<Props> = () => {
           required
         />
       </form>
-      {selectedFolderIndex !== null && (
+      {selectedFolderId !== null && (
         <form onSubmit={handleTaskSubmit}>
           <Input label="task" type="text" value={taskValue} onChange={(e) => setTaskValue(e.target.value)} required />
         </form>

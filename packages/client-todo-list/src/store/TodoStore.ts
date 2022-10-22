@@ -67,7 +67,7 @@ class TodoStore {
   public get snapshot() {
     return {
       folders: this._folders,
-      selectedFolderIndex: this._selectedFolderId,
+      selectedFolderId: this._selectedFolderId,
     };
   }
 }

@@ -22,7 +22,7 @@ describe('TodoStore', () => {
 
       expect(todoStore.snapshot.folders.includes(folder)).toBeTruthy();
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[0].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
     });
 
     it('두 개를 추가하는 경우 selectedFolderIndex는 1', () => {
@@ -30,7 +30,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(new Folder({ title: TITLE }));
 
       expect(todoStore.snapshot.folders.length).toBe(2);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[1].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[1].id);
     });
 
     it('n 개를 추가하는 경우 selectedFolderIndex는 n-1', () => {
@@ -40,7 +40,7 @@ describe('TodoStore', () => {
       }
 
       expect(todoStore.snapshot.folders.length).toBe(n);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[100 - 1].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[100 - 1].id);
     });
   });
 
@@ -56,7 +56,7 @@ describe('TodoStore', () => {
 
       expect(todoStore.snapshot.folders.includes(folder)).toBeFalsy();
       expect(todoStore.snapshot.folders.length).toBe(0);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(null);
+      expect(todoStore.snapshot.selectedFolderId).toBe(null);
     });
 
     it('2개에서 1개를 제거하는 경우 selectedFolderIndex는 0', () => {
@@ -69,7 +69,7 @@ describe('TodoStore', () => {
       todoStore.removeFolder(folder);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[0].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
     });
   });
 
@@ -86,7 +86,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder2);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[0].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[0].id);
     });
     it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderIndex는 1', () => {
       const folder = new Folder({ title: TITLE });
@@ -100,7 +100,7 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder3);
 
       expect(todoStore.snapshot.folders.length).toBe(2);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[1].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[1].id);
     });
   });
 
@@ -144,16 +144,16 @@ describe('TodoStore', () => {
       todoStore.addFolder(folder2);
       todoStore.addFolder(folder3);
 
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(todoStore.snapshot.folders[2].id);
+      expect(todoStore.snapshot.selectedFolderId).toBe(todoStore.snapshot.folders[2].id);
 
       todoStore.setSelectedFolderIndex(0);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
+      expect(todoStore.snapshot.selectedFolderId).toBe(0);
 
       todoStore.setSelectedFolderIndex(1);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(1);
+      expect(todoStore.snapshot.selectedFolderId).toBe(1);
 
       todoStore.setSelectedFolderIndex(2);
-      expect(todoStore.snapshot.selectedFolderIndex).toBe(2);
+      expect(todoStore.snapshot.selectedFolderId).toBe(2);
     });
   });
 });

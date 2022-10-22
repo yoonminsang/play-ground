@@ -13,14 +13,14 @@ interface Props {}
 const TodoList: FC<Props> = () => {
   const [
     {
-      snapshot: { folders, selectedFolderIndex },
+      snapshot: { folders, selectedFolderId },
     },
     store,
   ] = useStore(todoStore);
 
   const getCurrentFolder = useCallback(() => {
-    return folders.find((folder) => folder.id === (selectedFolderIndex as number)) as Folder;
-  }, [folders, selectedFolderIndex]);
+    return folders.find((folder) => folder.id === (selectedFolderId as number)) as Folder;
+  }, [folders, selectedFolderId]);
 
   return (
     <div css={S.wrapperStyle}>
@@ -30,7 +30,7 @@ const TodoList: FC<Props> = () => {
           {[...folders.values()].map((folder) => {
             return (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              <li key={folder.id} className={classNames({ selected: selectedFolderIndex === folder.id })}>
+              <li key={folder.id} className={classNames({ selected: selectedFolderId === folder.id })}>
                 <button
                   type="button"
                   onClick={() => {
@@ -56,7 +56,7 @@ const TodoList: FC<Props> = () => {
       <div>
         <h1>Task</h1>
         <ul>
-          {selectedFolderIndex !== null &&
+          {selectedFolderId !== null &&
             getCurrentFolder().tasks.map((task) => {
               const { title, isCompleted } = task;
               return (
