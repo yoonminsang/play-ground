@@ -23,7 +23,7 @@ const TodoListInputs: FC<Props> = () => {
   const handleFolderSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const folder = new Folder(folderValue);
+      const folder = new Folder({ title: folderValue });
       store.addFolder(folder);
       setFolderValue('');
     },

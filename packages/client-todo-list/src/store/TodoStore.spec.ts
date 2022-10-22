@@ -15,7 +15,7 @@ describe('TodoStore', () => {
 
   context('when addFolder', () => {
     it('하나를 추가하는 경우 selectedFolderIndex는 0', () => {
-      const folder = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
 
@@ -25,8 +25,8 @@ describe('TodoStore', () => {
     });
 
     it('두 개를 추가하는 경우 selectedFolderIndex는 1', () => {
-      todoStore.addFolder(new Folder(TITLE));
-      todoStore.addFolder(new Folder(TITLE));
+      todoStore.addFolder(new Folder({ title: TITLE }));
+      todoStore.addFolder(new Folder({ title: TITLE }));
 
       expect(todoStore.snapshot.folders.length).toBe(2);
       expect(todoStore.snapshot.selectedFolderIndex).toBe(1);
@@ -35,7 +35,7 @@ describe('TodoStore', () => {
     it('n 개를 추가하는 경우 selectedFolderIndex는 n-1', () => {
       const n = 100;
       for (let i = 0; i < n; i++) {
-        todoStore.addFolder(new Folder(TITLE));
+        todoStore.addFolder(new Folder({ title: TITLE }));
       }
 
       expect(todoStore.snapshot.folders.length).toBe(n);
@@ -45,7 +45,7 @@ describe('TodoStore', () => {
 
   context('when removeFolder', () => {
     it('1개에서 1개를 제거하는 경우 selectedFolderIndex는 null', () => {
-      const folder = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
 
@@ -59,8 +59,8 @@ describe('TodoStore', () => {
     });
 
     it('2개에서 1개를 제거하는 경우 selectedFolderIndex는 0', () => {
-      const folder = new Folder(TITLE);
-      const folder2 = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
+      const folder2 = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
       todoStore.addFolder(folder2);
@@ -77,28 +77,28 @@ describe('TodoStore', () => {
 
   context('when addFolder and removeFolder', () => {
     it('1개를 추가하고 1개를 삭제하고 한개를 추가하는 경우 selectedFolderIndex는 0', () => {
-      const folder = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
       expect(todoStore.snapshot.folders.length).toBe(0);
       todoStore.addFolder(folder);
       expect(todoStore.snapshot.folders.length).toBe(1);
       todoStore.removeFolder(folder);
       expect(todoStore.snapshot.folders.length).toBe(0);
 
-      const folder2 = new Folder(TITLE);
+      const folder2 = new Folder({ title: TITLE });
       todoStore.addFolder(folder2);
 
       expect(todoStore.snapshot.folders.length).toBe(1);
       expect(todoStore.snapshot.selectedFolderIndex).toBe(0);
     });
     it('2개를 추가하고 1개를 삭제하고 1개를 추가하는 경우 selectedFolderIndex는 1', () => {
-      const folder = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
       todoStore.addFolder(folder);
-      const folder2 = new Folder(TITLE);
+      const folder2 = new Folder({ title: TITLE });
       todoStore.addFolder(folder2);
 
       todoStore.removeFolder(folder);
 
-      const folder3 = new Folder(TITLE);
+      const folder3 = new Folder({ title: TITLE });
       todoStore.addFolder(folder3);
 
       expect(todoStore.snapshot.folders.length).toBe(2);
@@ -107,7 +107,7 @@ describe('TodoStore', () => {
   });
 
   it('addTask', () => {
-    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addFolder(new Folder({ title: TITLE }));
     todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
     const task = todoStore.snapshot.folders[0].tasks[0];
@@ -117,7 +117,7 @@ describe('TodoStore', () => {
   });
 
   it('removeTask', () => {
-    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addFolder(new Folder({ title: TITLE }));
     todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
     todoStore.removeTask(todoStore.snapshot.folders[0], todoStore.snapshot.folders[0].tasks[0]);
@@ -126,7 +126,7 @@ describe('TodoStore', () => {
   });
 
   it('toggleTask', () => {
-    todoStore.addFolder(new Folder(TITLE));
+    todoStore.addFolder(new Folder({ title: TITLE }));
     todoStore.addTask(todoStore.snapshot.folders[0], new Task({ title: TITLE }));
 
     expect(todoStore.snapshot.folders[0].tasks[0].isCompleted).toBeFalsy();
@@ -138,9 +138,9 @@ describe('TodoStore', () => {
 
   context('when getter, setter', () => {
     it('set selectedFolderIndex', () => {
-      const folder = new Folder(TITLE);
-      const folder2 = new Folder(TITLE);
-      const folder3 = new Folder(TITLE);
+      const folder = new Folder({ title: TITLE });
+      const folder2 = new Folder({ title: TITLE });
+      const folder3 = new Folder({ title: TITLE });
 
       todoStore.addFolder(folder);
       todoStore.addFolder(folder2);

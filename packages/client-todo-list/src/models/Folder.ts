@@ -7,7 +7,7 @@ class Folder {
 
   public static ID = 1;
 
-  constructor(title: string, tasks: Task[] = [], id?: number) {
+  constructor({ title, tasks = [], id }: { title: string; tasks?: Task[]; id?: number }) {
     this._title = title;
     this._tasks = tasks;
     if (typeof id === 'number') {
@@ -19,28 +19,24 @@ class Folder {
   }
 
   public addTask(task: Task) {
-    return new Folder(this.title, [...this._tasks, task], this._id);
+    return new Folder({ title: this.title, tasks: [...this._tasks, task], id: this._id });
   }
 
   public removeTask(task: Task) {
-    return new Folder(
-      this.title,
-      this._tasks.filter((_task) => _task !== task),
-      this._id,
-    );
+    return new Folder({ title: this.title, tasks: this._tasks.filter((_task) => _task !== task), id: this._id });
   }
 
   public toggleTask(task: Task) {
     const findTask = this.findTask(task);
     if (!findTask) return;
-    return new Folder(
-      this.title,
-      this._tasks.map((_task) => {
+    return new Folder({
+      title: this.title,
+      tasks: this._tasks.map((_task) => {
         if (_task === task) return findTask.toggle();
         return _task;
       }),
-      this._id,
-    );
+      id: this._id,
+    });
   }
 
   private findTask(task: Task) {
@@ -51,7 +47,7 @@ class Folder {
     return this._title;
   }
   setTitle(title: string) {
-    return new Folder(title, this._tasks, this._id);
+    return new Folder({ title, tasks: this._tasks, id: this._id });
   }
   get tasks() {
     return this._tasks;

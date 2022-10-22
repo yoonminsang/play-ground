@@ -12,7 +12,7 @@ describe('Folder Model', () => {
   beforeEach(() => {
     Folder.ID = 1;
     Task.ID = 1;
-    folder = new Folder(TITLE);
+    folder = new Folder({ title: TITLE });
     task = new Task({ title: TITLE });
   });
 
@@ -23,7 +23,7 @@ describe('Folder Model', () => {
 
   it('id auto increment', () => {
     expect(folder.id).toBe(1);
-    folder = new Folder(TITLE);
+    folder = new Folder({ title: TITLE });
     expect(folder.id).toBe(2);
   });
 
