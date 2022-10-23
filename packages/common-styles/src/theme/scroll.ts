@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export const scrollStyle = css`
+export const scroll = css`
   &::-webkit-scrollbar {
     width: 8px;
   }

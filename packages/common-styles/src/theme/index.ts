@@ -1,7 +1,7 @@
 import { color } from './color';
 import { media } from './media';
 import { typoStyle as typo } from './typo.style';
-import { scrollStyle as scroll } from './scroll.style';
+import { scroll } from './scroll';
 import { helperStyle } from './helper.style';
 import { ellipsisStyle } from './utils/ellipsis';
 
