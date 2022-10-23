@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 
-const truncate = css`
+export const truncate = css`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
-const lineClamp = (v: number) => css`
+export const lineClamp = (v: number) => css`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: initial;
@@ -14,8 +14,3 @@ const lineClamp = (v: number) => css`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: ${v};
 `;
-
-export const ellipsisStyle = {
-  truncate,
-  lineClamp,
-};

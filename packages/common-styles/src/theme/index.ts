@@ -2,8 +2,8 @@ import { color } from './color';
 import { media } from './media';
 import { typo } from './typo';
 import { scroll } from './scroll';
-import { ellipsisStyle } from './utils/ellipsis';
 import { center } from './center';
+import { lineClamp, truncate } from './utils/ellipsis';
 
 export const theme = {
   color,
@@ -11,7 +11,8 @@ export const theme = {
   typo,
   scroll,
   center,
-  ...ellipsisStyle,
+  truncate,
+  lineClamp,
 };
 
 export type TTheme = typeof theme;
