@@ -5,6 +5,7 @@ import { scroll } from './scroll';
 import { center } from './utils/center';
 import { lineClamp, truncate } from './utils/ellipsis';
 import { position } from './utils/position';
+import { size } from './utils/size';
 
 export const theme = {
   color,
@@ -15,6 +16,7 @@ export const theme = {
   truncate,
   lineClamp,
   position,
+  size,
 };
 
 export type TTheme = typeof theme;
