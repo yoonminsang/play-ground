@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export const typoStyle = {
+export const typo = {
   displayL: css`
     font-weight: 800;
     font-size: 60px;
