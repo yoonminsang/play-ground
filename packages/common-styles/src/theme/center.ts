@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const center = css`
+export const center = css`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -11,7 +11,3 @@ const center = css`
   left: 0;
   top: 0;
 `;
-
-export const helperStyle = {
-  center,
-};
