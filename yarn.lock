@@ -1881,6 +1881,7 @@ __metadata:
     "@types/react": ^18.0.18
     "@types/react-dom": ^18.0.6
     babel-loader: ^8.2.5
+    csstype: ^3.1.1
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.8.2
@@ -7988,6 +7989,13 @@ __metadata:
   version: 3.1.0
   resolution: "csstype@npm:3.1.0"
   checksum: 644e986cefab86525f0b674a06889cfdbb1f117e5b7d1ce0fc55b0423ecc58807a1ea42ecc75c4f18999d14fc42d1d255f84662a45003a52bb5840e977eb2ffd
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "csstype@npm:3.1.1"
+  checksum: 1f7b4f5fdd955b7444b18ebdddf3f5c699159f13e9cf8ac9027ae4a60ae226aef9bbb14a6e12ca7dba3358b007cee6354b116e720262867c398de6c955ea451d
   languageName: node
   linkType: hard
 
