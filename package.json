@@ -14,7 +14,7 @@
     "common-utils": "yarn workspace @common/utils",
     "server": "yarn workspace server",
     "postinstall": "husky install",
-    "test": "yarn workspaces foreach --parallel --include client-setting --include client-tetris --include client-todo-list --include @common/components --include @common/utils run test"
+    "test": "yarn workspaces foreach --parallel --include client-setting --include client-tetris --include client-todo-list --include @common/components --include @common/styles --include @common/utils run test"
   },
   "workspaces": [
     "packages/*"
