@@ -85,6 +85,7 @@ module.exports = {
         project: ['./tsconfig.json', './packages/**/tsconfig.json'],
       },
       rules: {
+        '@typescript-eslint/indent': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/lines-between-class-members': 'off',
