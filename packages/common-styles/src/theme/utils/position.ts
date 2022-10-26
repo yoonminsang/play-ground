@@ -1,6 +1,4 @@
 // https://github.com/toss/slash 참조
-import type { CSSProperties } from 'react';
-
 import { css, SerializedStyles } from '@emotion/react';
 
 import { CSSPixelValue } from '../types';
@@ -57,24 +55,28 @@ interface Coordinates {
  * // 다음처럼도 사용 가능합니다
  * position('absolute', {top: 0, left: 0});
  */
-export function position(
-  position: CSSProperties['position'],
-  top: CSSPixelValue,
-  right: CSSPixelValue,
-  bottom: CSSPixelValue,
-  left: CSSPixelValue,
-): SerializedStyles;
-export function position(
-  top: CSSPixelValue,
-  right: CSSPixelValue,
-  bottom: CSSPixelValue,
-  left: CSSPixelValue,
-): SerializedStyles;
-export function position(position: CSSProperties['position'], coordinates?: Coordinates): SerializedStyles;
+
+type PositionOrTop = Property.Position | CSSPixelValue;
+type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
 
 export function position(
-  positionOrTop: CSSProperties['position'] | CSSPixelValue,
-  topOrRightOrCoordinates: CSSPixelValue | Coordinates = {},
+  position: Property.Position,
+  top: CSSPixelValue,
+  right: CSSPixelValue,
+  bottom: CSSPixelValue,
+  left: CSSPixelValue,
+): SerializedStyles;
+export function position(
+  top: CSSPixelValue,
+  right: CSSPixelValue,
+  bottom: CSSPixelValue,
+  left: CSSPixelValue,
+): SerializedStyles;
+export function position(position: Property.Position, coordinates?: Coordinates): SerializedStyles;
+
+export function position(
+  positionOrTop: PositionOrTop,
+  topOrRightOrCoordinates: TopOrRightOrCoordinates = {},
   ...values: CSSPixelValue[]
 ) {
   const [top, right, bottom, left] = (() => {
@@ -101,11 +103,11 @@ export function position(
   ]);
 }
 
-function isPositionValue(value: unknown): value is Property.Position {
+function isPositionValue(value: PositionOrTop): value is Property.Position {
   const positions: Property.Position[] = ['static', 'relative', 'absolute', 'fixed', 'sticky', '-webkit-sticky'];
-  return positions.includes(value as Property.Position);
+  return positions.includes(value as any);
 }
 
-function isCSSPixelValue(value: unknown): value is CSSPixelValue {
+function isCSSPixelValue(value: TopOrRightOrCoordinates): value is CSSPixelValue {
   return typeof value === 'string' || typeof value === 'number';
 }
