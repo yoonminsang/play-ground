@@ -1,8 +1,9 @@
+// https://github.com/toss/slash 참조
 import { matchers } from '@emotion/jest';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
-import { position } from '../position';
+import { position } from './position';
 
 expect.extend(matchers);
 
