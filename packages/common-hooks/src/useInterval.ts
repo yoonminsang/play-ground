@@ -4,10 +4,14 @@ type TimerHandler = (...args: any[]) => void;
 type Delay = number | null;
 
 /**
- * @param callback - Function that will be called every `delay` ms.
- * @param delay - Number representing the delay in ms. Set to `null` to "pause" the interval.
+ * @description
+ * window.setInterval 를 쉽게 사용할 수 있는 hook 입니다.
+ *
+ * @example
+ * // fn이 1000ms마다 실행됩니다.
+ * useInterval(fn, 1000);
+ *
  */
-
 export function useInterval(callback: TimerHandler, delay: Delay) {
   const savedCallbackRef = useRef<TimerHandler>();
 

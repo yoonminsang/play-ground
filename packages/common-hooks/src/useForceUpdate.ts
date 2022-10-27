@@ -4,7 +4,6 @@ import { useReducer } from 'react';
 const updater = (num: number): number => (num + 1) % 1_000_000;
 
 /**
- * @name useForceUpdate
  * @description
  * 반환된 함수를 실행 시 강제로 리렌더가 실행됩니다.
  *

@@ -2,7 +2,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 /**
- * @name usePreservedCallback
  * @description
  * 컴포넌트가 mount 되어 있는 동안 인자로 주어진 `callback` 함수의 레퍼런스를 보존합니다.
  *

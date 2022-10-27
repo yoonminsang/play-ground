@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
 /**
- * @name useLoading
  * @description
  * Promise의 로딩 상태를 쉽게 관리할 수 있게 해주는 훅입니다.
  *

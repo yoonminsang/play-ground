@@ -2,7 +2,6 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
 /**
- * @name useDidUpdate
  * @description
  * deps로 들어간 값이 업데이트 되었을 때 effect를 실행합니다.
  *
