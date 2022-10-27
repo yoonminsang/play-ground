@@ -8,8 +8,8 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       return initialValue;
     }
   });
@@ -21,12 +21,16 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
         if (typeof window !== 'undefined') {
           window.localStorage.setItem(key, JSON.stringify(value));
         }
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       }
     },
     [key],
   );
 
-  return [storedValue, setValue] as const;
+  const resetValue = useCallback(() => {
+    setValue(initialValue);
+  }, [initialValue, setValue]);
+
+  return [storedValue, setValue, resetValue] as const;
 }

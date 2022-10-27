@@ -1,15 +1,5 @@
 import { useCallback, useState } from 'react';
 
-/**
- * @description
- * session storage를 사용하는 훅입니다.
- *
- * @example
- * const handle정답제출 = useThrottle(() => {
- *   set퀴즈정답제출();
- *   mutate();
- * }, 200);
- */
 export function useSessionStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
@@ -18,8 +8,8 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
     try {
       const item = window.sessionStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       return initialValue;
     }
   });
@@ -31,12 +21,16 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
         if (typeof window !== 'undefined') {
           window.sessionStorage.setItem(key, JSON.stringify(value));
         }
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       }
     },
     [key],
   );
 
-  return [storedValue, setValue] as const;
+  const resetValue = useCallback(() => {
+    setValue(initialValue);
+  }, [initialValue, setValue]);
+
+  return [storedValue, setValue, resetValue] as const;
 }
