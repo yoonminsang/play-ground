@@ -1,5 +1,15 @@
 import { useCallback, useState } from 'react';
 
+/**
+ * @description window.localStorage를 사용하는 hook 입니다.
+ *
+ * @note
+ * // 이 hook을 직접사용하기보다는 wrapping해서 사용하는 것을 권장합니다.
+ * const useLocalUserStorage = () => {
+ *   return useLocalStorage<User | null>('user',null);
+ * }
+ * const [user, setUser, resetUser] = useLocalUserStorage();
+ */
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
