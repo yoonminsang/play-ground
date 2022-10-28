@@ -12,6 +12,9 @@ interface Coordinates {
   left?: CSSPixelValue;
 }
 
+type PositionOrTop = Property.Position | CSSPixelValue;
+type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
+
 /**
  * @name position
  * @description
@@ -55,10 +58,6 @@ interface Coordinates {
  * // 다음처럼도 사용 가능합니다
  * position('absolute', {top: 0, left: 0});
  */
-
-type PositionOrTop = Property.Position | CSSPixelValue;
-type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
-
 export function position(
   position: Property.Position,
   top: CSSPixelValue,
