@@ -117,8 +117,7 @@ const Tooltip: FC<Props> = ({
             `}
         position: fixed;
 
-        width: fit-content;
-        max-width: ${maxWidth};
+        ${theme.size({ width: 'fit-content', maxWidth })}
 
         padding: 6px 9px;
         border-radius: 10px;

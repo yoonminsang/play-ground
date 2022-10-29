@@ -62,14 +62,17 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 
     const commonStyle = useMemo(() => {
       return css`
-        border-radius: 32px;
-        width: ${fullWidth ? '100%' : 'auto'};
-        height: ${height};
-        padding: ${padding};
-        font-size: ${fontSize};
-        border: 1px solid transparent;
         transition: all 0.3s;
+
+        ${theme.size({ width: fullWidth ? '100%' : 'auto', height })}
+
+        padding: ${padding};
+        border: 1px solid transparent;
+        border-radius: 32px;
+
         cursor: ${isLoading ? 'default' : 'pointer'};
+
+        font-size: ${fontSize};
         &:active {
           transform: translateY(1px);
         }
@@ -77,7 +80,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           cursor: default;
         }
       `;
-    }, [fontSize, fullWidth, height, padding, isLoading]);
+    }, [theme, fullWidth, height, padding, isLoading, fontSize]);
 
     const filledStyle = useMemo(() => {
       const [backgroundColor, hoverBackgroundColor] = (() => {
@@ -173,8 +176,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     const disabledStyle = useMemo(() => {
       return css`
         border-color: transparent;
-        color: ${theme.color.grey500};
         background-color: ${theme.color.grey100};
+        color: ${theme.color.grey500};
         &:hover {
           background-color: ${theme.color.grey100};
         }
