@@ -1,11 +1,10 @@
-import { useState, useCallback, useRef, CSSProperties, MutableRefObject } from 'react';
+import { useState, useCallback, useRef, CSSProperties, MutableRefObject, useMemo } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import { css, useTheme } from '@emotion/react';
 import { createPortal } from 'react-dom';
 
 // TODO:
-// position에 따른 화살표 추가 or boolean으로 옵션
 // type 추가(timeout 등등) + lint disabled 제거
 // 주석추가
 
@@ -31,6 +30,7 @@ interface Props {
     | 'left'
     | 'left-end';
   portalContainer?: Element | DocumentFragment;
+  arrow?: boolean;
   maxWidth?: CSSProperties['maxWidth'];
   backgroundColor?: string;
   color?: string;
@@ -42,6 +42,7 @@ const Tooltip: FC<Props> = ({
   type = 'hover',
   position = 'bottom',
   portalContainer,
+  arrow = true,
   maxWidth = 300,
   backgroundColor,
   color,
@@ -51,6 +52,10 @@ const Tooltip: FC<Props> = ({
   const ref = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [show, setShow] = useState<boolean>(false);
+  const HOVER_GAP = useMemo(() => {
+    if (arrow) return DEFAULT_GAP + 5;
+    return DEFAULT_GAP;
+  }, [arrow]);
 
   const onMouseEnter = useCallback(() => {
     setShow(true);
@@ -102,36 +107,157 @@ const Tooltip: FC<Props> = ({
       default:
         return { top: 'auto' };
     }
-  }, [position]);
+  }, [HOVER_GAP, position]);
 
-  const getComponent = (hiddne = false, tooltipRef?: MutableRefObject<HTMLDivElement | null>) => (
-    <div
-      ref={tooltipRef}
-      css={css`
-        ${hiddne
-          ? css`
-              opacity: 0;
-            `
-          : css`
-              ${theme.position('fixed', { ...getPositions() })}
-            `}
-        position: fixed;
+  const getArrowPositions = useCallback(() => {
+    switch (position) {
+      case 'top-start':
+        return css`
+          &::after {
+            bottom: 0px;
+            left: ${ARROW_SIZE * 2}px;
+            margin-bottom: -${ARROW_SIZE * 2}px;
+            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+          }
+        `;
+      case 'top':
+        return css`
+          &::after {
+            bottom: 0px;
+            left: 50%;
+            margin-left: -${ARROW_SIZE}px;
+            margin-bottom: -${ARROW_SIZE * 2}px;
+            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+          }
+        `;
+      case 'top-end':
+        return css`
+          &::after {
+            bottom: 0px;
+            right: ${ARROW_SIZE * 2}px;
+            margin-bottom: -${ARROW_SIZE * 2}px;
+            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+          }
+        `;
+      case 'bottom-start':
+        return css`
+          &::after {
+            top: -${ARROW_SIZE * 2}px;
+            left: ${ARROW_SIZE * 2}px;
+            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+          }
+        `;
+      case 'bottom':
+        return css`
+          &::after {
+            top: -${ARROW_SIZE * 2}px;
+            left: 50%;
+            margin-left: -${ARROW_SIZE}px;
+            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+          }
+        `;
+      case 'bottom-end':
+        return css`
+          &::after {
+            top: -${ARROW_SIZE * 2}px;
+            right: ${ARROW_SIZE * 2}px;
+            margin-bottom: -${ARROW_SIZE * 2}px;
+            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+          }
+        `;
+      case 'left-start':
+        return css`
+          &::after {
+            top: ${ARROW_SIZE * 2}px;
+            left: 100%;
+            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+          }
+        `;
+      case 'left':
+        return css`
+          &::after {
+            top: 50%;
+            left: 100%;
+            margin-top: -${ARROW_SIZE}px;
+            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+          }
+        `;
+      case 'left-end':
+        return css`
+          &::after {
+            bottom: ${ARROW_SIZE * 2}px;
+            left: 100%;
+            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+          }
+        `;
+      case 'right-start':
+        return css`
+          &::after {
+            top: ${ARROW_SIZE * 2}px;
+            right: 100%;
+            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+          }
+        `;
+      case 'right':
+        return css`
+          &::after {
+            top: 50%;
+            right: 100%;
+            margin-top: -${ARROW_SIZE}px;
+            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+          }
+        `;
+      case 'right-end':
+        return css`
+          &::after {
+            bottom: ${ARROW_SIZE * 2}px;
+            right: 100%;
+            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+          }
+        `;
+      default:
+        return css``;
+    }
+  }, [backgroundColor, position, theme]);
 
-        ${theme.size({ width: 'fit-content', maxWidth })}
+  const getComponent = useCallback(
+    (hiddne = false, tooltipRef?: MutableRefObject<HTMLDivElement | null>) => (
+      <div
+        ref={tooltipRef}
+        css={css`
+          ${hiddne
+            ? css`
+                opacity: 0;
+              `
+            : css`
+                ${theme.position('fixed', { ...getPositions() })}
+              `}
+          position: fixed;
 
-        padding: 6px 9px;
-        border-radius: 10px;
+          ${theme.size({ width: 'fit-content', maxWidth })}
 
-        background-color: ${backgroundColor ?? theme.color.grey600};
-        color: ${color ?? theme.color.white};
+          padding: 6px 9px;
+          border-radius: 10px;
 
-        pointer-events: none;
+          background-color: ${backgroundColor ?? theme.color.grey600};
+          color: ${color ?? theme.color.white};
 
-        ${theme.typo.titleM}
-      `}
-    >
-      {text}
-    </div>
+          pointer-events: none;
+
+          ${theme.typo.titleM}
+          &::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: ${ARROW_SIZE}px;
+          }
+          ${getArrowPositions()}
+        `}
+      >
+        {text}
+      </div>
+    ),
+    [backgroundColor, color, getArrowPositions, getPositions, maxWidth, text, theme],
   );
 
   return (
@@ -154,4 +280,5 @@ const Tooltip: FC<Props> = ({
 
 export default Tooltip;
 
-const HOVER_GAP = 4;
+const DEFAULT_GAP = 4;
+const ARROW_SIZE = 5;
