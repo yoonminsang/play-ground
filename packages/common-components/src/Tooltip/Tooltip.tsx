@@ -285,6 +285,11 @@ const Tooltip: FC<Props> = ({
 
 export default Tooltip;
 
+/**
+ * DEFAULT_GAP: children과 tooltip의 거리
+ * ARROW_HEIGHT: 화살표의 높이
+ * ARROW_WIDTH: 활살표의 크기(높이*2를 유지해주세요)
+ */
 const DEFAULT_GAP = 4;
 const ARROW_HEIGHT = 5;
 const ARROW_WIDTH = ARROW_HEIGHT * 2;
