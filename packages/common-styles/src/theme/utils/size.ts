@@ -6,6 +6,10 @@ import { css } from '@emotion/react';
 interface SizeOptions {
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
+  minWidth?: CSSProperties['minWidth'];
+  minHeight?: CSSProperties['minHeight'];
+  maxWidth?: CSSProperties['maxWidth'];
+  maxHeight?: CSSProperties['maxHeight'];
 }
 
 /**
@@ -30,8 +34,8 @@ interface SizeOptions {
  * //   height: 100px;
  * // `;
  */
-export function size({ width, height }: SizeOptions) {
-  return css({ width, height });
+export function size({ width, height, minWidth, minHeight, maxWidth, maxHeight }: SizeOptions) {
+  return css({ width, height, minWidth, minHeight, maxWidth, maxHeight });
 }
 
 size.full = size({ width: '100%', height: '100%' });
