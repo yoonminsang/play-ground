@@ -57,7 +57,7 @@ Default.args = {
 export const MaxWidth500 = Template.bind({});
 MaxWidth500.args = {
   ...defaultArgs,
-  maxWidth: '500px',
+  maxWidth: 500,
 };
 
 export const BackgroundColorRed = Template.bind({});

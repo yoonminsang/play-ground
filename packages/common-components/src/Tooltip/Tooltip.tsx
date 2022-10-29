@@ -31,7 +31,7 @@ interface Props {
     | 'left'
     | 'left-end';
   portalContainer?: Element | DocumentFragment;
-  maxWidth?: string;
+  maxWidth?: CSSProperties['maxWidth'];
   backgroundColor?: string;
   color?: string;
   children?: ReactNode;
@@ -42,7 +42,7 @@ const Tooltip: FC<Props> = ({
   type = 'hover',
   position = 'bottom',
   portalContainer,
-  maxWidth = '300px',
+  maxWidth = 300,
   backgroundColor,
   color,
   children,
