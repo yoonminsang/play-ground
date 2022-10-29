@@ -245,19 +245,24 @@ const Tooltip: FC<Props> = ({
           pointer-events: none;
 
           ${theme.typo.titleM}
-          &::after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: ${ARROW_SIZE}px;
-          }
-          ${getArrowPositions()}
+
+          ${arrow && [
+            css`
+              &::after {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                border-width: ${ARROW_SIZE}px;
+              }
+            `,
+            getArrowPositions(),
+          ]}
         `}
       >
         {text}
       </div>
     ),
-    [backgroundColor, color, getArrowPositions, getPositions, maxWidth, text, theme],
+    [arrow, backgroundColor, color, getArrowPositions, getPositions, maxWidth, text, theme],
   );
 
   return (
