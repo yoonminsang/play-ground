@@ -115,8 +115,8 @@ const Tooltip: FC<Props> = ({
         return css`
           &::after {
             bottom: 0px;
-            left: ${ARROW_SIZE * 2}px;
-            margin-bottom: -${ARROW_SIZE * 2}px;
+            left: ${ARROW_WIDTH}px;
+            margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
           }
         `;
@@ -125,8 +125,8 @@ const Tooltip: FC<Props> = ({
           &::after {
             bottom: 0px;
             left: 50%;
-            margin-left: -${ARROW_SIZE}px;
-            margin-bottom: -${ARROW_SIZE * 2}px;
+            margin-left: -${ARROW_HEIGHT}px;
+            margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
           }
         `;
@@ -134,41 +134,41 @@ const Tooltip: FC<Props> = ({
         return css`
           &::after {
             bottom: 0px;
-            right: ${ARROW_SIZE * 2}px;
-            margin-bottom: -${ARROW_SIZE * 2}px;
+            right: ${ARROW_WIDTH}px;
+            margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
           }
         `;
       case 'bottom-start':
         return css`
           &::after {
-            top: -${ARROW_SIZE * 2}px;
-            left: ${ARROW_SIZE * 2}px;
+            top: -${ARROW_WIDTH}px;
+            left: ${ARROW_WIDTH}px;
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
         `;
       case 'bottom':
         return css`
           &::after {
-            top: -${ARROW_SIZE * 2}px;
+            top: -${ARROW_WIDTH}px;
             left: 50%;
-            margin-left: -${ARROW_SIZE}px;
+            margin-left: -${ARROW_HEIGHT}px;
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
         `;
       case 'bottom-end':
         return css`
           &::after {
-            top: -${ARROW_SIZE * 2}px;
-            right: ${ARROW_SIZE * 2}px;
-            margin-bottom: -${ARROW_SIZE * 2}px;
+            top: -${ARROW_WIDTH}px;
+            right: ${ARROW_WIDTH}px;
+            margin-bottom: -${ARROW_WIDTH}px;
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
         `;
       case 'left-start':
         return css`
           &::after {
-            top: ${ARROW_SIZE * 2}px;
+            top: ${ARROW_WIDTH}px;
             left: 100%;
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
@@ -178,14 +178,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             top: 50%;
             left: 100%;
-            margin-top: -${ARROW_SIZE}px;
+            margin-top: -${ARROW_HEIGHT}px;
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
         `;
       case 'left-end':
         return css`
           &::after {
-            bottom: ${ARROW_SIZE * 2}px;
+            bottom: ${ARROW_WIDTH}px;
             left: 100%;
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
@@ -193,7 +193,7 @@ const Tooltip: FC<Props> = ({
       case 'right-start':
         return css`
           &::after {
-            top: ${ARROW_SIZE * 2}px;
+            top: ${ARROW_WIDTH}px;
             right: 100%;
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
@@ -203,14 +203,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             top: 50%;
             right: 100%;
-            margin-top: -${ARROW_SIZE}px;
+            margin-top: -${ARROW_HEIGHT}px;
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
         `;
       case 'right-end':
         return css`
           &::after {
-            bottom: ${ARROW_SIZE * 2}px;
+            bottom: ${ARROW_WIDTH}px;
             right: 100%;
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
@@ -252,7 +252,7 @@ const Tooltip: FC<Props> = ({
                 content: '';
                 position: absolute;
                 border-style: solid;
-                border-width: ${ARROW_SIZE}px;
+                border-width: ${ARROW_HEIGHT}px;
               }
             `,
             getArrowPositions(),
@@ -286,4 +286,5 @@ const Tooltip: FC<Props> = ({
 export default Tooltip;
 
 const DEFAULT_GAP = 4;
-const ARROW_SIZE = 5;
+const ARROW_WIDTH = 10;
+const ARROW_HEIGHT = 5;
