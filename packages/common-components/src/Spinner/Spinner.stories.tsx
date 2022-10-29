@@ -5,6 +5,11 @@ import Spinner from './Spinner';
 export default {
   title: 'Components/Spinner',
   component: Spinner,
+  parameters: {
+    backgrounds: {
+      default: 'black',
+    },
+  },
 } as ComponentMeta<typeof Spinner>;
 
 const Template: ComponentStory<typeof Spinner> = (args) => <Spinner {...args} />;
