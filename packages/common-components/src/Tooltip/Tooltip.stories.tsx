@@ -27,8 +27,8 @@ export default {
 const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args} />;
 
 const defaultArgs = {
-  // text: 'text',
-  text: `그대가 부네요
+  // title: 'title',
+  title: `그대가 부네요
   내 가슴안에 그대라는 바람이
   언제나 내게 그랬듯이
   내 맘 흔들어 놓고

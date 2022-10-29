@@ -1,5 +1,5 @@
-import { useState, useCallback, ReactNode, useRef, CSSProperties, MutableRefObject } from 'react';
-import type { FC } from 'react';
+import { useState, useCallback, useRef, CSSProperties, MutableRefObject } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import { css, useTheme } from '@emotion/react';
 import { createPortal } from 'react-dom';
@@ -15,7 +15,7 @@ import { createPortal } from 'react-dom';
 // 나는 그냥 클래스이름에 prefix붙여서 안겹치제 만들고 emotion으로 제어해야 할 듯
 
 interface Props {
-  text: string;
+  title: ReactNode;
   type?: 'hover';
   position?:
     | 'top-start'
@@ -37,7 +37,7 @@ interface Props {
   children?: ReactNode;
 }
 const Tooltip: FC<Props> = ({
-  text,
+  title: text,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type = 'hover',
   position = 'bottom',
