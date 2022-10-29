@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, CSSProperties, MutableRefObject, useMemo } from 'react';
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, HTMLAttributes } from 'react';
 
 import { css, useTheme } from '@emotion/react';
 import { createPortal } from 'react-dom';
@@ -13,7 +13,7 @@ import { createPortal } from 'react-dom';
 // mui는 클래스와 styles 내부 라이브러리를 이요해서 제어.
 // 나는 그냥 클래스이름에 prefix붙여서 안겹치제 만들고 emotion으로 제어해야 할 듯
 
-interface Props {
+interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title: ReactNode;
   type?: 'hover';
   position?:
@@ -47,6 +47,7 @@ const Tooltip: FC<Props> = ({
   backgroundColor,
   color,
   children,
+  ...otherProps
 }) => {
   const theme = useTheme();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -114,8 +115,7 @@ const Tooltip: FC<Props> = ({
       case 'top-start':
         return css`
           &::after {
-            bottom: 0px;
-            left: ${ARROW_WIDTH}px;
+            ${theme.position({ bottom: 0, left: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
           }
@@ -123,8 +123,7 @@ const Tooltip: FC<Props> = ({
       case 'top':
         return css`
           &::after {
-            bottom: 0px;
-            left: 50%;
+            ${theme.position({ bottom: 0, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
@@ -133,8 +132,7 @@ const Tooltip: FC<Props> = ({
       case 'top-end':
         return css`
           &::after {
-            bottom: 0px;
-            right: ${ARROW_WIDTH}px;
+            ${theme.position({ bottom: 0, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
           }
@@ -142,16 +140,14 @@ const Tooltip: FC<Props> = ({
       case 'bottom-start':
         return css`
           &::after {
-            top: -${ARROW_WIDTH}px;
-            left: ${ARROW_WIDTH}px;
+            ${theme.position({ top: -ARROW_WIDTH, left: ARROW_WIDTH })}
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
         `;
       case 'bottom':
         return css`
           &::after {
-            top: -${ARROW_WIDTH}px;
-            left: 50%;
+            ${theme.position({ top: -ARROW_WIDTH, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
@@ -159,8 +155,7 @@ const Tooltip: FC<Props> = ({
       case 'bottom-end':
         return css`
           &::after {
-            top: -${ARROW_WIDTH}px;
-            right: ${ARROW_WIDTH}px;
+            ${theme.position({ top: -ARROW_WIDTH, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
           }
@@ -168,16 +163,14 @@ const Tooltip: FC<Props> = ({
       case 'left-start':
         return css`
           &::after {
-            top: ${ARROW_WIDTH}px;
-            left: 100%;
+            ${theme.position({ top: ARROW_WIDTH, left: '100%' })}
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
         `;
       case 'left':
         return css`
           &::after {
-            top: 50%;
-            left: 100%;
+            ${theme.position({ top: '50%', left: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
@@ -185,24 +178,21 @@ const Tooltip: FC<Props> = ({
       case 'left-end':
         return css`
           &::after {
-            bottom: ${ARROW_WIDTH}px;
-            left: 100%;
+            ${theme.position({ bottom: ARROW_WIDTH, left: '100%' })}
             border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
           }
         `;
       case 'right-start':
         return css`
           &::after {
-            top: ${ARROW_WIDTH}px;
-            right: 100%;
+            ${theme.position({ top: ARROW_WIDTH, right: '100%' })}
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
         `;
       case 'right':
         return css`
           &::after {
-            top: 50%;
-            right: 100%;
+            ${theme.position({ top: '50%', right: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
@@ -210,8 +200,7 @@ const Tooltip: FC<Props> = ({
       case 'right-end':
         return css`
           &::after {
-            bottom: ${ARROW_WIDTH}px;
-            right: 100%;
+            ${theme.position({ bottom: ARROW_WIDTH, right: '100%' })}
             border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
           }
         `;
@@ -274,6 +263,7 @@ const Tooltip: FC<Props> = ({
         css={css`
           width: fit-content;
         `}
+        {...otherProps}
       >
         {children}
         {getComponent(true, tooltipRef)}
