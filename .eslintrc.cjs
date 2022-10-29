@@ -29,7 +29,6 @@ module.exports = {
 
     'jsx-a11y/label-has-associated-control': 'off',
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
-    'react/display-name': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
