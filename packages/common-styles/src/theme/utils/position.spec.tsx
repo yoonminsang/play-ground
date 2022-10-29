@@ -47,4 +47,17 @@ describe('position 테스트', () => {
     expect(el).not.toHaveStyleRule('right', '0');
     expect(el).toHaveStyleRule('left', '0');
   });
+
+  it('position({top: 0, left: 0})', () => {
+    const { getByTestId } = render(<div data-testid="test" css={position({ top: 0, left: 0 })} />);
+
+    const el = getByTestId('test');
+
+    expect(el).toBeInTheDocument();
+
+    expect(el).toHaveStyleRule('top', '0');
+    expect(el).not.toHaveStyleRule('bottom', '0');
+    expect(el).not.toHaveStyleRule('right', '0');
+    expect(el).toHaveStyleRule('left', '0');
+  });
 });

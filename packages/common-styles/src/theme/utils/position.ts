@@ -12,7 +12,7 @@ interface Coordinates {
   left?: CSSPixelValue;
 }
 
-type PositionOrTop = Property.Position | CSSPixelValue;
+type PositionOrTopOrCordinates = Property.Position | CSSPixelValue | Coordinates;
 type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
 
 /**
@@ -72,16 +72,26 @@ export function position(
   left: CSSPixelValue,
 ): SerializedStyles;
 export function position(position: Property.Position, coordinates?: Coordinates): SerializedStyles;
+export function position(coordinates: Coordinates): SerializedStyles;
 
 export function position(
-  positionOrTop: PositionOrTop,
+  positionOrTopOrCoordinates: PositionOrTopOrCordinates,
   topOrRightOrCoordinates: TopOrRightOrCoordinates = {},
   ...values: CSSPixelValue[]
 ) {
   const [top, right, bottom, left] = (() => {
+    // position(coordinates)
+    if (typeof positionOrTopOrCoordinates === 'object') {
+      return [
+        positionOrTopOrCoordinates.top,
+        positionOrTopOrCoordinates.right,
+        positionOrTopOrCoordinates.bottom,
+        positionOrTopOrCoordinates.left,
+      ];
+    }
     // position(top, right, bottom, left);
-    if (!isPositionValue(positionOrTop)) {
-      return [positionOrTop, topOrRightOrCoordinates as CSSPixelValue, ...values];
+    if (!isPositionValue(positionOrTopOrCoordinates)) {
+      return [positionOrTopOrCoordinates, topOrRightOrCoordinates as CSSPixelValue, ...values];
     }
     // position(position, coordinates);
     if (!isCSSPixelValue(topOrRightOrCoordinates)) {
@@ -97,12 +107,12 @@ export function position(
   })();
 
   return css([
-    css({ position: isPositionValue(positionOrTop) ? positionOrTop : undefined }),
+    css({ position: isPositionValue(positionOrTopOrCoordinates) ? positionOrTopOrCoordinates : undefined }),
     css({ top, right, bottom, left }),
   ]);
 }
 
-function isPositionValue(value: PositionOrTop): value is Property.Position {
+function isPositionValue(value: PositionOrTopOrCordinates): value is Property.Position {
   const positions: Property.Position[] = ['static', 'relative', 'absolute', 'fixed', 'sticky', '-webkit-sticky'];
   return positions.includes(value as any);
 }
