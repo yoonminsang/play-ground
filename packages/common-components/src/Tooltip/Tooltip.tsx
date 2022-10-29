@@ -286,5 +286,5 @@ const Tooltip: FC<Props> = ({
 export default Tooltip;
 
 const DEFAULT_GAP = 4;
-const ARROW_WIDTH = 10;
 const ARROW_HEIGHT = 5;
+const ARROW_WIDTH = ARROW_HEIGHT * 2;
