@@ -54,6 +54,12 @@ Default.args = {
   ...defaultArgs,
 };
 
+export const NoArrow = Template.bind({});
+NoArrow.args = {
+  ...defaultArgs,
+  arrow: false,
+};
+
 export const MaxWidth500 = Template.bind({});
 MaxWidth500.args = {
   ...defaultArgs,
