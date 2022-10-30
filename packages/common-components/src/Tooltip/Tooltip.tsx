@@ -44,8 +44,8 @@ const Tooltip: FC<Props> = ({
   portalContainer,
   arrow = true,
   maxWidth = 300,
-  backgroundColor,
-  color,
+  backgroundColor: _backgroundColor,
+  color: _color,
   children,
   ...otherProps
 }) => {
@@ -57,6 +57,8 @@ const Tooltip: FC<Props> = ({
     if (arrow) return DEFAULT_GAP + 5;
     return DEFAULT_GAP;
   }, [arrow]);
+  const backgroundColor = useMemo(() => _backgroundColor ?? theme.color.grey600, [_backgroundColor, theme]);
+  const color = useMemo(() => _color ?? theme.color.white, [_color, theme]);
 
   const onMouseEnter = useCallback(() => {
     setShow(true);
@@ -117,7 +119,7 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ bottom: 0, left: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+            border-color: ${backgroundColor} transparent transparent transparent;
           }
         `;
       case 'top':
@@ -126,7 +128,7 @@ const Tooltip: FC<Props> = ({
             ${theme.position({ bottom: 0, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+            border-color: ${backgroundColor} transparent transparent transparent;
           }
         `;
       case 'top-end':
@@ -134,14 +136,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ bottom: 0, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor ?? theme.color.grey600} transparent transparent transparent;
+            border-color: ${backgroundColor} transparent transparent transparent;
           }
         `;
       case 'bottom-start':
         return css`
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, left: ARROW_WIDTH })}
-            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+            border-color: transparent transparent ${backgroundColor} transparent;
           }
         `;
       case 'bottom':
@@ -149,7 +151,7 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
-            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+            border-color: transparent transparent ${backgroundColor} transparent;
           }
         `;
       case 'bottom-end':
@@ -157,14 +159,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: transparent transparent ${backgroundColor ?? theme.color.grey600} transparent;
+            border-color: transparent transparent ${backgroundColor} transparent;
           }
         `;
       case 'left-start':
         return css`
           &::after {
             ${theme.position({ top: ARROW_WIDTH, left: '100%' })}
-            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+            border-color: transparent transparent transparent ${backgroundColor};
           }
         `;
       case 'left':
@@ -172,21 +174,21 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: '50%', left: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
-            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+            border-color: transparent transparent transparent ${backgroundColor};
           }
         `;
       case 'left-end':
         return css`
           &::after {
             ${theme.position({ bottom: ARROW_WIDTH, left: '100%' })}
-            border-color: transparent transparent transparent ${backgroundColor ?? theme.color.grey600};
+            border-color: transparent transparent transparent ${backgroundColor};
           }
         `;
       case 'right-start':
         return css`
           &::after {
             ${theme.position({ top: ARROW_WIDTH, right: '100%' })}
-            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+            border-color: transparent ${backgroundColor} transparent transparent;
           }
         `;
       case 'right':
@@ -194,14 +196,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: '50%', right: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
-            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+            border-color: transparent ${backgroundColor} transparent transparent;
           }
         `;
       case 'right-end':
         return css`
           &::after {
             ${theme.position({ bottom: ARROW_WIDTH, right: '100%' })}
-            border-color: transparent ${backgroundColor ?? theme.color.grey600} transparent transparent;
+            border-color: transparent ${backgroundColor} transparent transparent;
           }
         `;
       default:
@@ -228,8 +230,8 @@ const Tooltip: FC<Props> = ({
           padding: 6px 9px;
           border-radius: 10px;
 
-          background-color: ${backgroundColor ?? theme.color.grey600};
-          color: ${color ?? theme.color.white};
+          background-color: ${backgroundColor};
+          color: ${color};
 
           pointer-events: none;
 
