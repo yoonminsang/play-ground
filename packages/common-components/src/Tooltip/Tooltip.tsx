@@ -39,7 +39,7 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   children?: ReactNode;
 }
 const Tooltip: FC<Props> = ({
-  title: text,
+  title,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type = 'hover',
   position = 'bottom',
@@ -252,10 +252,10 @@ const Tooltip: FC<Props> = ({
           ]}
         `}
       >
-        {text}
+        {title}
       </div>
     ),
-    [arrow, backgroundColor, color, getArrowPositions, getPositions, maxWidth, text, theme],
+    [arrow, backgroundColor, color, getArrowPositions, getPositions, maxWidth, title, theme],
   );
 
   return (
