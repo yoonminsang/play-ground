@@ -4,6 +4,8 @@ import type { FC, ReactNode, HTMLAttributes } from 'react';
 import { css, useTheme } from '@emotion/react';
 import { createPortal } from 'react-dom';
 
+import type { Property } from 'csstype';
+
 // TODO:
 // type 추가(timeout 등등) + lint disabled 제거
 // 주석추가
@@ -32,8 +34,8 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   portalContainer?: Element | DocumentFragment;
   arrow?: boolean;
   maxWidth?: CSSProperties['maxWidth'];
-  backgroundColor?: string;
-  color?: string;
+  backgroundColor?: Property.BackgroundColor;
+  color?: Property.Color;
   children?: ReactNode;
 }
 const Tooltip: FC<Props> = ({
