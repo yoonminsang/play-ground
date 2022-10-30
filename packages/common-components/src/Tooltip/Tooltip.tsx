@@ -56,7 +56,7 @@ const Tooltip: FC<Props> = ({
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [show, setShow] = useState<boolean>(false);
   const HOVER_GAP = useMemo(() => {
-    if (arrow) return DEFAULT_GAP + 5;
+    if (arrow) return DEFAULT_GAP + ARROW_HEIGHT;
     return DEFAULT_GAP;
   }, [arrow]);
   const backgroundColor = useMemo(() => _backgroundColor ?? theme.color.grey600, [_backgroundColor, theme]);
