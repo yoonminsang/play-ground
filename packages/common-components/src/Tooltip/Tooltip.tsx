@@ -70,7 +70,7 @@ const Tooltip: FC<Props> = ({
     setShow(false);
   }, []);
 
-  const getPositions = useCallback((): CSSProperties => {
+  const getTooltipPositions = useCallback((): CSSProperties => {
     if (!ref.current || !tooltipRef.current) return {};
     const { top, right, bottom, left } = ref.current.getBoundingClientRect();
     const [tooltipWidth, tooltipHeight] = [tooltipRef.current.scrollWidth, tooltipRef.current.scrollHeight];
@@ -223,7 +223,7 @@ const Tooltip: FC<Props> = ({
                 opacity: 0;
               `
             : css`
-                ${theme.position('fixed', { ...getPositions() })}
+                ${theme.position('fixed', { ...getTooltipPositions() })}
               `}
           position: fixed;
 
@@ -255,7 +255,7 @@ const Tooltip: FC<Props> = ({
         {title}
       </div>
     ),
-    [arrow, backgroundColor, color, getArrowPositions, getPositions, maxWidth, title, theme],
+    [arrow, backgroundColor, color, getArrowPositions, getTooltipPositions, maxWidth, title, theme],
   );
 
   return (
