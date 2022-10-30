@@ -75,40 +75,40 @@ const Tooltip: FC<Props> = ({
     const { top, right, bottom, left } = ref.current.getBoundingClientRect();
     const [tooltipWidth, tooltipHeight] = [tooltipRef.current.scrollWidth, tooltipRef.current.scrollHeight];
 
-    const calcTop = bottom + HOVER_GAP;
-    const calcBottom = document.body.clientHeight - top + HOVER_GAP;
-    const calcLeft = right + HOVER_GAP;
-    const calcRight = left + HOVER_GAP;
-    const calcSubTop = (top + bottom) / 2 - tooltipHeight / 2;
-    const calcSubBottom = document.body.clientHeight - bottom;
-    const calcSubLeft = (left + right) / 2 - tooltipWidth / 2;
-    const calcSubRight = document.body.clientWidth - right;
+    const calcTop = { top: bottom + HOVER_GAP };
+    const calcBottom = { bottom: document.body.clientHeight - top + HOVER_GAP };
+    const calcLeft = { left: right + HOVER_GAP };
+    const calcRight = { right: left + HOVER_GAP };
+    const calcSubTop = { top: (top + bottom) / 2 - tooltipHeight / 2 };
+    const calcSubBottom = { bottom: document.body.clientHeight - bottom };
+    const calcSubLeft = { left: (left + right) / 2 - tooltipWidth / 2 };
+    const calcSubRight = { right: document.body.clientWidth - right };
 
     switch (position) {
       case 'top-start':
-        return { bottom: calcBottom, left };
+        return { ...calcBottom, left };
       case 'top':
-        return { bottom: calcBottom, left: calcSubLeft };
+        return { ...calcBottom, ...calcSubLeft };
       case 'top-end':
-        return { bottom: calcBottom, right: calcSubRight };
+        return { ...calcBottom, ...calcSubRight };
       case 'bottom-start':
-        return { top: calcTop, left };
+        return { ...calcTop, left };
       case 'bottom':
-        return { top: calcTop, left: calcSubLeft };
+        return { ...calcTop, ...calcSubLeft };
       case 'bottom-end':
-        return { top: calcTop, right: calcSubRight };
+        return { ...calcTop, ...calcSubRight };
       case 'left-start':
-        return { right: calcRight, top };
+        return { ...calcRight, top };
       case 'left':
-        return { right: calcRight, top: calcSubTop };
+        return { ...calcRight, ...calcSubTop };
       case 'left-end':
-        return { right: calcRight, bottom: calcSubBottom };
+        return { ...calcRight, ...calcSubBottom };
       case 'right-start':
-        return { left: calcLeft, top };
+        return { ...calcLeft, top };
       case 'right':
-        return { left: calcLeft, top: calcSubTop };
+        return { ...calcLeft, ...calcSubTop };
       case 'right-end':
-        return { left: calcLeft, bottom: calcSubBottom };
+        return { ...calcLeft, ...calcSubBottom };
       default:
         return { top: 'auto' };
     }
