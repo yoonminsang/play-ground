@@ -115,13 +115,17 @@ const Tooltip: FC<Props> = ({
   }, [HOVER_GAP, position]);
 
   const getArrowPositions = useCallback(() => {
+    const topBorderColor = { 'border-color': `${backgroundColor} transparent transparent transparent` };
+    const bottomBorderColor = { 'border-color': `transparent transparent ${backgroundColor} transparent` };
+    const leftBorderColor = { 'border-color': `transparent transparent transparent ${backgroundColor}` };
+    const rightBorderColor = { 'border-color': `transparent ${backgroundColor} transparent transparent` };
     switch (position) {
       case 'top-start':
         return css`
           &::after {
             ${theme.position({ bottom: 0, left: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor} transparent transparent transparent;
+            ${topBorderColor}
           }
         `;
       case 'top':
@@ -130,7 +134,7 @@ const Tooltip: FC<Props> = ({
             ${theme.position({ bottom: 0, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor} transparent transparent transparent;
+            ${topBorderColor}
           }
         `;
       case 'top-end':
@@ -138,14 +142,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ bottom: 0, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: ${backgroundColor} transparent transparent transparent;
+            ${topBorderColor}
           }
         `;
       case 'bottom-start':
         return css`
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, left: ARROW_WIDTH })}
-            border-color: transparent transparent ${backgroundColor} transparent;
+            ${bottomBorderColor}
           }
         `;
       case 'bottom':
@@ -153,7 +157,7 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
-            border-color: transparent transparent ${backgroundColor} transparent;
+            ${bottomBorderColor}
           }
         `;
       case 'bottom-end':
@@ -161,14 +165,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: -ARROW_WIDTH, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
-            border-color: transparent transparent ${backgroundColor} transparent;
+            ${bottomBorderColor}
           }
         `;
       case 'left-start':
         return css`
           &::after {
             ${theme.position({ top: ARROW_WIDTH, left: '100%' })}
-            border-color: transparent transparent transparent ${backgroundColor};
+            ${leftBorderColor}
           }
         `;
       case 'left':
@@ -176,14 +180,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: '50%', left: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
-            border-color: transparent transparent transparent ${backgroundColor};
+            ${leftBorderColor}
           }
         `;
       case 'left-end':
         return css`
           &::after {
             ${theme.position({ bottom: ARROW_WIDTH, left: '100%' })}
-            border-color: transparent transparent transparent ${backgroundColor};
+            ${leftBorderColor}
           }
         `;
       case 'right-start':
@@ -198,14 +202,14 @@ const Tooltip: FC<Props> = ({
           &::after {
             ${theme.position({ top: '50%', right: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
-            border-color: transparent ${backgroundColor} transparent transparent;
+            ${rightBorderColor}
           }
         `;
       case 'right-end':
         return css`
           &::after {
             ${theme.position({ bottom: ARROW_WIDTH, right: '100%' })}
-            border-color: transparent ${backgroundColor} transparent transparent;
+            ${rightBorderColor}
           }
         `;
       default:
