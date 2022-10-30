@@ -32,6 +32,7 @@ describe('Tooltip', () => {
         <div>{CHILDREN_TEXT}</div>
       </Tooltip>,
     );
+
     expect(portalContainer).not.toBeNull();
     expect(portalContainer.childElementCount).toBe(0);
     fireEvent.mouseOver(screen.getByTestId(TOOLTIP_ID));
