@@ -123,7 +123,7 @@ const Tooltip: FC<Props> = ({
       case 'top-start':
         return css`
           &::after {
-            ${theme.position({ bottom: 0, left: ARROW_WIDTH })}
+            ${theme.position.absolute({ bottom: 0, left: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             ${topBorderColor}
           }
@@ -131,7 +131,7 @@ const Tooltip: FC<Props> = ({
       case 'top':
         return css`
           &::after {
-            ${theme.position({ bottom: 0, left: '50%' })}
+            ${theme.position.absolute({ bottom: 0, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             margin-bottom: -${ARROW_WIDTH}px;
             ${topBorderColor}
@@ -140,7 +140,7 @@ const Tooltip: FC<Props> = ({
       case 'top-end':
         return css`
           &::after {
-            ${theme.position({ bottom: 0, right: ARROW_WIDTH })}
+            ${theme.position.absolute({ bottom: 0, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             ${topBorderColor}
           }
@@ -148,14 +148,14 @@ const Tooltip: FC<Props> = ({
       case 'bottom-start':
         return css`
           &::after {
-            ${theme.position({ top: -ARROW_WIDTH, left: ARROW_WIDTH })}
+            ${theme.position.absolute({ top: -ARROW_WIDTH, left: ARROW_WIDTH })}
             ${bottomBorderColor}
           }
         `;
       case 'bottom':
         return css`
           &::after {
-            ${theme.position({ top: -ARROW_WIDTH, left: '50%' })}
+            ${theme.position.absolute({ top: -ARROW_WIDTH, left: '50%' })}
             margin-left: -${ARROW_HEIGHT}px;
             ${bottomBorderColor}
           }
@@ -163,7 +163,7 @@ const Tooltip: FC<Props> = ({
       case 'bottom-end':
         return css`
           &::after {
-            ${theme.position({ top: -ARROW_WIDTH, right: ARROW_WIDTH })}
+            ${theme.position.absolute({ top: -ARROW_WIDTH, right: ARROW_WIDTH })}
             margin-bottom: -${ARROW_WIDTH}px;
             ${bottomBorderColor}
           }
@@ -171,14 +171,14 @@ const Tooltip: FC<Props> = ({
       case 'left-start':
         return css`
           &::after {
-            ${theme.position({ top: ARROW_WIDTH, left: '100%' })}
+            ${theme.position.absolute({ top: ARROW_WIDTH, left: '100%' })}
             ${leftBorderColor}
           }
         `;
       case 'left':
         return css`
           &::after {
-            ${theme.position({ top: '50%', left: '100%' })}
+            ${theme.position.absolute({ top: '50%', left: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
             ${leftBorderColor}
           }
@@ -186,21 +186,21 @@ const Tooltip: FC<Props> = ({
       case 'left-end':
         return css`
           &::after {
-            ${theme.position({ bottom: ARROW_WIDTH, left: '100%' })}
+            ${theme.position.absolute({ bottom: ARROW_WIDTH, left: '100%' })}
             ${leftBorderColor}
           }
         `;
       case 'right-start':
         return css`
           &::after {
-            ${theme.position({ top: ARROW_WIDTH, right: '100%' })}
+            ${theme.position.absolute({ top: ARROW_WIDTH, right: '100%' })}
             border-color: transparent ${backgroundColor} transparent transparent;
           }
         `;
       case 'right':
         return css`
           &::after {
-            ${theme.position({ top: '50%', right: '100%' })}
+            ${theme.position.absolute({ top: '50%', right: '100%' })}
             margin-top: -${ARROW_HEIGHT}px;
             ${rightBorderColor}
           }
@@ -208,7 +208,7 @@ const Tooltip: FC<Props> = ({
       case 'right-end':
         return css`
           &::after {
-            ${theme.position({ bottom: ARROW_WIDTH, right: '100%' })}
+            ${theme.position.absolute({ bottom: ARROW_WIDTH, right: '100%' })}
             ${rightBorderColor}
           }
         `;
@@ -227,7 +227,7 @@ const Tooltip: FC<Props> = ({
                 opacity: 0;
               `
             : css`
-                ${theme.position('fixed', { ...getTooltipPositions() })}
+                ${theme.position.fixed({ ...getTooltipPositions() })}
               `}
           position: fixed;
 
@@ -247,7 +247,6 @@ const Tooltip: FC<Props> = ({
             css`
               &::after {
                 content: '';
-                position: absolute;
                 border-style: solid;
                 border-width: ${ARROW_HEIGHT}px;
               }
