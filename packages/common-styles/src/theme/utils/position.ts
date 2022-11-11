@@ -30,13 +30,6 @@ type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
  *   bottom: CSSPixelValue,
  *   left: CSSPixelValue
  * ): SerializedStyles;
- *
- * function position(
- *   top: CSSPixelValue,
- *   right: CSSPixelValue,
- *   bottom: CSSPixelValue,
- *   left: CSSPixelValue
- * ): SerializedStyles;
  * ```
  *
  * @example
@@ -52,11 +45,12 @@ type TopOrRightOrCoordinates = CSSPixelValue | Coordinates;
  *   left: 0;
  * `;
  *
- * // 첫번째 인자를 생략하고 `top` 부터 넘길 수 있습니다.
- * const allZero = position(0, 0, 0, 0);
- *
  * // 다음처럼도 사용 가능합니다
  * position('absolute', {top: 0, left: 0});
+ *
+ * // 다음처럼도 사용 가능합니다(absolute, fixed, sticky)
+ * position.absolute(0, 0, 0, ,0);
+ * position.absolute({top: 0, left: 0});
  */
 export function position(
   position: Property.Position,
@@ -65,14 +59,7 @@ export function position(
   bottom: CSSPixelValue,
   left: CSSPixelValue,
 ): SerializedStyles;
-export function position(
-  top: CSSPixelValue,
-  right: CSSPixelValue,
-  bottom: CSSPixelValue,
-  left: CSSPixelValue,
-): SerializedStyles;
 export function position(position: Property.Position, coordinates?: Coordinates): SerializedStyles;
-export function position(coordinates: Coordinates): SerializedStyles;
 
 export function position(
   positionOrTopOrCoordinates: PositionOrTopOrCordinates,
@@ -80,19 +67,6 @@ export function position(
   ...values: CSSPixelValue[]
 ) {
   const [top, right, bottom, left] = (() => {
-    // position(coordinates)
-    if (typeof positionOrTopOrCoordinates === 'object') {
-      return [
-        positionOrTopOrCoordinates.top,
-        positionOrTopOrCoordinates.right,
-        positionOrTopOrCoordinates.bottom,
-        positionOrTopOrCoordinates.left,
-      ];
-    }
-    // position(top, right, bottom, left);
-    if (!isPositionValue(positionOrTopOrCoordinates)) {
-      return [positionOrTopOrCoordinates, topOrRightOrCoordinates as CSSPixelValue, ...values];
-    }
     // position(position, coordinates);
     if (!isCSSPixelValue(topOrRightOrCoordinates)) {
       return [
@@ -112,11 +86,30 @@ export function position(
   ]);
 }
 
-function isPositionValue(value: PositionOrTopOrCordinates): value is Property.Position {
+function isPositionValue(value: unknown): value is Property.Position {
   const positions: Property.Position[] = ['static', 'relative', 'absolute', 'fixed', 'sticky', '-webkit-sticky'];
   return positions.includes(value as any);
 }
 
-function isCSSPixelValue(value: TopOrRightOrCoordinates): value is CSSPixelValue {
+function isCSSPixelValue(value: unknown): value is CSSPixelValue {
   return typeof value === 'string' || typeof value === 'number';
+}
+
+position.absolute = createPosition('absolute');
+position.fixed = createPosition('fixed');
+position.sticky = createPosition('sticky');
+
+function createPosition(pos: Property.Position) {
+  function func(coordinates: Coordinates): SerializedStyles;
+  function func(top: CSSPixelValue, right: CSSPixelValue, bottom: CSSPixelValue, left: CSSPixelValue): SerializedStyles;
+  function func(topOrCoordinates: Coordinates | CSSPixelValue, ...values: CSSPixelValue[]) {
+    // position(position, coordinates);
+    if (!isCSSPixelValue(topOrCoordinates)) {
+      return position(pos, topOrCoordinates);
+    }
+    // position(position, top, right, bottom, left);
+    return position(pos, topOrCoordinates, values[0], values[1], values[2]);
+  }
+
+  return func;
 }
