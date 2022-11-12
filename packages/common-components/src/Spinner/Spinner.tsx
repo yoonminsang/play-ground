@@ -37,7 +37,7 @@ const Spinner: FC<Props> = ({ size, color = 'white' }) => {
     return wrapperSize - 2 * spinnerBorder;
   }, [spinnerBorder, wrapperSize]);
 
-  const bordeColor = useMemo(() => {
+  const borderColor = useMemo(() => {
     switch (color) {
       case 'grey':
         return theme.color.grey500;
@@ -61,10 +61,10 @@ const Spinner: FC<Props> = ({ size, color = 'white' }) => {
           width: ${innerSize}px;
           height: ${innerSize}px;
           margin: ${spinnerBorder}px;
-          border: ${spinnerBorder}px solid ${bordeColor};
+          border: ${spinnerBorder}px solid ${borderColor};
           border-radius: 50%;
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-          border-color: ${bordeColor} transparent transparent transparent;
+          border-color: ${borderColor} transparent transparent transparent;
         }
         div:nth-of-type(1) {
           animation-delay: -0.45s;

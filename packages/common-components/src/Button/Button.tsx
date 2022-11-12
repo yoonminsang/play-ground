@@ -151,7 +151,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
   }, [theme, color]);
 
   const subtleStyle = useMemo(() => {
-    const [corlos, hoverBackgroundColor] = (() => {
+    const [colors, hoverBackgroundColor] = (() => {
       switch (color) {
         case 'red':
           return [theme.color.red700, theme.color.red50];
@@ -165,7 +165,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
       }
     })();
     return css`
-      color: ${corlos};
+      color: ${colors};
       &:hover {
         background-color: ${hoverBackgroundColor};
       }
