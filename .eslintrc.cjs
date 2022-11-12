@@ -149,6 +149,10 @@ module.exports = {
           },
         },
       },
+      rules: {
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+      },
     },
     {
       files: ['packages/common-const/**/*.ts?(x)', 'packages/common-const/**/*.js?(x)'],
