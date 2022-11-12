@@ -3,6 +3,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import { css, SerializedStyles, useTheme } from '@emotion/react';
 
+import { SIZE_1 } from '../../const/size';
 import Spinner from '../Spinner/Spinner';
 
 type Variant = 'filled' | 'light' | 'outline' | 'ghost';
@@ -46,16 +47,16 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
   const [fontSize, height, padding] = useMemo(() => {
     switch (size) {
       case 'xl':
-        return ['20px', '58px', '0 32px'];
+        return [SIZE_1.xl.fontsize, SIZE_1.xl.height, SIZE_1.xl.padding];
       case 'lg':
-        return ['18px', '48px', '0 26px'];
+        return [SIZE_1.lg.fontsize, SIZE_1.lg.height, SIZE_1.lg.padding];
       case 'md':
-        return ['16px', '40px', '0 22px'];
+        return [SIZE_1.md.fontsize, SIZE_1.md.height, SIZE_1.md.padding];
       case 'sm':
-        return ['14px', '34px', '0 18px'];
+        return [SIZE_1.sm.fontsize, SIZE_1.sm.height, SIZE_1.sm.padding];
       case 'xs':
       default:
-        return ['12px', '28px', '0 14px'];
+        return [SIZE_1.xs.fontsize, SIZE_1.xs.height, SIZE_1.xs.padding];
     }
   }, [size]);
 

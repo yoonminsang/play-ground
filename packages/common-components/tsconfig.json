@@ -11,6 +11,14 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true
   },
-  "include": ["src", "utils", "../common-styles/src/emotion.d.ts", ".storybook/*", "jest.setup.ts", "@types/*"],
+  "include": [
+    "src",
+    "utils",
+    "const",
+    "../common-styles/src/emotion.d.ts",
+    ".storybook/*",
+    "jest.setup.ts",
+    "@types/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
