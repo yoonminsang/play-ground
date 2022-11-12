@@ -218,11 +218,11 @@ const Tooltip: FC<Props> = ({
   }, [backgroundColor, position, theme]);
 
   const getComponent = useCallback(
-    (hiddne = false, tooltipRef?: MutableRefObject<HTMLDivElement | null>) => (
+    (hidden = false, tooltipRef?: MutableRefObject<HTMLDivElement | null>) => (
       <div
         ref={tooltipRef}
         css={css`
-          ${hiddne
+          ${hidden
             ? css`
                 opacity: 0;
               `
