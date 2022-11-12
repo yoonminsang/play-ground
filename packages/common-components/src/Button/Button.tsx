@@ -5,7 +5,7 @@ import { css, SerializedStyles, useTheme } from '@emotion/react';
 
 import Spinner from '../Spinner/Spinner';
 
-type Variant = 'filled' | 'light' | 'outline' | 'subtle';
+type Variant = 'filled' | 'light' | 'outline' | 'ghost';
 type Color = 'red' | 'blue' | 'green' | 'grey';
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -150,7 +150,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
     `;
   }, [theme, color]);
 
-  const subtleStyle = useMemo(() => {
+  const ghostStyle = useMemo(() => {
     const [colors, hoverBackgroundColor] = (() => {
       switch (color) {
         case 'red':
@@ -216,7 +216,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
         variant === 'filled' && filledStyle,
         variant === 'light' && lightStyle,
         variant === 'outline' && outlineStyle,
-        variant === 'subtle' && subtleStyle,
+        variant === 'ghost' && ghostStyle,
         disabled && disabledStyle,
       ]}
       {...otherProps}

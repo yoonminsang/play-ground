@@ -169,7 +169,7 @@ OutlineGrey.args = {
 
 export const SubtleRed = Template.bind({});
 SubtleRed.args = {
-  variant: 'subtle',
+  variant: 'ghost',
   color: 'red',
   size: 'md',
   children,
@@ -177,7 +177,7 @@ SubtleRed.args = {
 
 export const SubtleBlue = Template.bind({});
 SubtleBlue.args = {
-  variant: 'subtle',
+  variant: 'ghost',
   color: 'blue',
   size: 'md',
   children,
@@ -185,7 +185,7 @@ SubtleBlue.args = {
 
 export const SubtleGreen = Template.bind({});
 SubtleGreen.args = {
-  variant: 'subtle',
+  variant: 'ghost',
   color: 'green',
   size: 'md',
   children,
@@ -193,7 +193,7 @@ SubtleGreen.args = {
 
 export const SubtleGrey = Template.bind({});
 SubtleGrey.args = {
-  variant: 'subtle',
+  variant: 'ghost',
   color: 'grey',
   size: 'md',
   children,
