@@ -21,6 +21,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
   size: Size;
   variant: Variant;
+  as?: any;
   testId?: string;
   customStyle?: SerializedStyles;
 }
@@ -36,6 +37,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
     rightIcon,
     size,
     variant,
+    as = 'button',
     testId,
     customStyle,
     ...otherProps
@@ -205,9 +207,10 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
     }
   }, [size]);
 
+  const Component = as;
+
   return (
-    <button
-      type="button"
+    <Component
       ref={forwardedRef}
       data-testid={testId}
       disabled={disabled}
@@ -233,7 +236,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
           </>
         )}
       </div>
-    </button>
+    </Component>
   );
 });
 

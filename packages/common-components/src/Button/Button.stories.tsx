@@ -16,6 +16,12 @@ Default.args = {
   children,
 };
 
+export const AsAnchor = Template.bind({});
+AsAnchor.args = {
+  children,
+  as: 'a',
+};
+
 export const FullWidth = Template.bind({});
 FullWidth.args = {
   variant: 'filled',
